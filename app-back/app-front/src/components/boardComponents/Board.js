@@ -3,47 +3,7 @@ import TaskBoard from "./TaskBoard";
 
 class Board extends Component {
     state = {
-        TaskBoards: [{
-            name: "To do",
-            index: 0,
-            Tasks: [{
-                index: 0,
-                indexP: 0,
-                name: "Task1",
-                description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel error quos, saepe ea quaerat quas. Corporis, praesentium, assumenda unde necessitatibus, minus ad dolorem molestias doloremque rem nisi illum ducimus? Id?"
-            },
-            {
-                index: 1,
-                indexP: 0,
-                name: "Task2",
-                description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel error quos, saepe ea quaerat quas. Corporis, praesentium, assumenda unde necessitatibus, minus ad dolorem molestias doloremque rem nisi illum ducimus? Id?"
-            }]
-        }, {
-            name: "Doing",
-            index: 1,
-            Tasks: [{
-                index: 0,
-                indexP: 1,
-                name: "Task1",
-                description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel error quos, saepe ea quaerat quas. Corporis, praesentium, assumenda unde necessitatibus, minus ad dolorem molestias doloremque rem nisi illum ducimus? Id?"
-            },
-            {
-                index: 1,
-                indexP: 1,
-                name: "Task2",
-                description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel error quos, saepe ea quaerat quas. Corporis, praesentium, assumenda unde necessitatibus, minus ad dolorem molestias doloremque rem nisi illum ducimus? Id?"
-            }]
-        },
-        {
-            name: "Done",
-            index: 2,
-            Tasks: [{
-                index: 0,
-                indexP: 2,
-                name: "Task1",
-                description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel error quos, saepe ea quaerat quas. Corporis, praesentium, assumenda unde necessitatibus, minus ad dolorem molestias doloremque rem nisi illum ducimus? Id?"
-            }]
-        }]
+        TaskBoards: []
     }
 
     componentDidMount() {
