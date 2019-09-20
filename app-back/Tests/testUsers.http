@@ -1,7 +1,47 @@
 //GET ALL users
 GET http://localhost:3001/users
+content-type: application/json
+
 
 ###
 
 //GET user by UserName
 GET http://localhost:3001/users/sicard6
+content-type: application/json
+
+
+###
+
+//GET user by UserName and password
+GET http://localhost:3001/users/sicard6/blabla
+content-type: application/json
+
+
+###
+
+//POST one users
+POST http://localhost:3001/users
+content-type: application/json
+
+{
+    "userName": "Mateo",
+    "mail": "m.sicar10@gmail.com",
+    "password": "blabla"
+}
+
+###
+
+PUT http://localhost:3001/users/Mateo
+content-type: application/json
+
+{
+    "userName": "Mateo",
+    "mail": "m.sicar10@gmail.com",
+    "password": "123456"
+}
+
+###
+
+//DELETE One user by userneme
+DELETE http://localhost:3001/users/Mateo
+content-type: application/json
