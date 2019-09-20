@@ -28,12 +28,12 @@ class TaskBoard extends Component {
 
     render() {
         return (
-            <div class="col-4">
-                <div class="card shadow-sm p-3 mb-5 bg-white rounded taskBoard"  >
-                    <div class="card-body">
-                        <div class=" badge text-center shadow-sm bg-primary p-2 text-white rounded tituloTaskBoard">{this.state.name}</div>
+            <div className="col-4">
+                <div className="card shadow-sm p-3 mb-5 bg-white rounded taskBoard"  >
+                    <div className="card-body">
+                        <div className=" badge text-center shadow-sm bg-primary p-2 text-white rounded tituloTaskBoard">{this.state.name}</div>
                         <div>{this.state.tasks.map((e, i) => <Task value={e} key={e.name} functions={this.state.functions} />)}</div>
-                        <button onClick={this.add} type="button" class="btn btn-primary float-right"> Add</button>
+                        <button onClick={this.add} type="button" className="btn btn-primary float-right"> Add</button>
                     </div>
                 </div>
             </div>

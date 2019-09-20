@@ -1,0 +1,15 @@
+
+//GET ALL proyects
+GET http://localhost:3001/proyects
+
+###
+
+//GET proyect by AdminProyect and ProyectName
+
+GET http://localhost:3001/proyects/sicard6/MyProyect
+
+###
+
+//GET proyect by AdminProyect
+
+GET http://localhost:3001/proyects/sicard6

@@ -1,0 +1,7 @@
+//GET ALL users
+GET http://localhost:3001/users
+
+###
+
+//GET user by UserName
+GET http://localhost:3001/users/sicard6

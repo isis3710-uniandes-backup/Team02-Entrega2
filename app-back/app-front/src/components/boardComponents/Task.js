@@ -12,14 +12,14 @@ class Task extends Component {
 
     render() {
         return (
-            <div class="card bg-light task shadow-sm">
-                <div class="card-body">
-                    <div class="card-title border-bottom">{this.state.name}</div>
-                    <div class="card-body">{this.state.des}</div>
+            <div className="card bg-light task shadow-sm">
+                <div className="card-body">
+                    <div className="card-title border-bottom">{this.state.name}</div>
+                    <div className="card-body">{this.state.des}</div>
                     <button onClick={() => {
                         this.state.functions[0](this.props.value.indexP, this.props.value.index);
                     }
-                    } type="button" class="btn btn-outline-primary float-right">Remove</button>
+                    } type="button" className="btn btn-outline-primary float-right">Remove</button>
                 </div>
             </div>
         );
