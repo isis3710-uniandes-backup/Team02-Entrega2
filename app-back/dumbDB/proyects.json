@@ -1,0 +1,86 @@
+[{
+        "ProyectName": "MyProyect",
+        "AdminProyect": "sicard6",
+        "Associates": ["david55"],
+        "TaskBoards": [{
+            "name": "To do",
+            "index":0,
+            "Tasks": [{
+                "index":0,
+                "indexP":0,
+                "name": "Task1",
+                "description": "description",
+                "onCharge":["sicard6","david55"],
+                "timeSpent":[{
+                    "UserName": "sicard6",
+                    "timeSec": 1200
+                },{
+                    "UserName": "david55",
+                    "timeSec": 1600
+                }]
+            },
+            {
+                "index":1,
+                "indexP":0,
+                "name": "Task2",
+                "description": "description",
+                "onCharge":["sicard6","david55"],
+                "timeSpent":[{
+                    "UserName": "sicard6",
+                    "timeSec": 1200
+                },{
+                    "UserName": "david55",
+                    "timeSec": 1600
+                }]
+            }]
+        }, {
+            "name": "Doing",
+            "index":1,
+            "Tasks": [{
+                "index":0,
+                "indexP":1,
+                "name": "Task1",
+                "description": "description",
+                "onCharge":["sicard6","david55"],
+                "timeSpent":[{
+                    "UserName": "sicard6",
+                    "timeSec": 1200
+                },{
+                    "UserName": "david55",
+                    "timeSec": 1600
+                }]
+            },
+            {
+                "index":1,
+                "indexP":1,
+                "name": "Task2",
+                "description": "description",
+                "onCharge":["sicard6","david55"],
+                "timeSpent":[{
+                    "UserName": "sicard6",
+                    "timeSec": 1200
+                },{
+                    "UserName": "david55",
+                    "timeSec": 1600
+                }]
+            }]
+        },
+        {
+            "name": "Done",
+            "index":2,
+            "Tasks": [{
+                "index":0,
+                "indexP":2,
+                "name": "Task1",
+                "description": "description",
+                "onCharge":["sicard6","david55"],
+                "timeSpent":[{
+                    "UserName": "sicard6",
+                    "timeSec": 1200
+                },{
+                    "UserName": "david55",
+                    "timeSec": 1600
+                }]
+            }]
+        }]
+    }]

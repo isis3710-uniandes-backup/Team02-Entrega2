@@ -1,0 +1,2 @@
+mongoimport --db MyTimeDB --collection users --type json --file C:\Users\mateo\Desktop\users.json --jsonArray
+mongoimport --db MyTimeDB --collection proyects --type json --file C:\Users\mateo\Desktop\proyects.json --jsonArray
