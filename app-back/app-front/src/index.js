@@ -1,6 +1,14 @@
-import React from "react";
-import ReactDom from "react-dom";
-import Board from "./components/boardComponents/Board";
+import React from 'react';
+import ReactDom from 'react-dom';
+import { Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import LocarRouter from './components/Router';
 
+const history = createBrowserHistory();
 
-ReactDom.render(<Board/>, document.getElementById("root"));
+ReactDom.render(
+	<Router history={history}>
+		<LocarRouter />
+	</Router>,
+	document.getElementById('root')
+);

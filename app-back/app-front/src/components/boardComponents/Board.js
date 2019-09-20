@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import TaskBoard from "./TaskBoard";
+import {withRouter} from "react-router-dom";
+
 
 class Board extends Component {
     state = {
@@ -12,7 +14,7 @@ class Board extends Component {
             this.setState({
                 TaskBoards: t[0].TaskBoards
             });
-            console.log(this.state);
+            console.log(this.props);
         })
     }
 
@@ -34,7 +36,7 @@ class Board extends Component {
         return (
             <div>
                 <div className="text-center shadow-sm p-3 mb-5 bg-white rounded ">
-                    My Kanban App
+                    HELLO:  {this.props.user}
                 </div>
                 <div className="container-fluid">
                     <div className="row">
@@ -49,4 +51,4 @@ class Board extends Component {
     }
 }
 
-export default Board;
+export default withRouter(Board);
