@@ -1,0 +1,20 @@
+
+.taskBoard{
+    margin: 8pt
+}
+
+.task{
+    margin-bottom: 2rem
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.tituloTaskBoard{
+    width: 6rem;
+    position: relative;
+    bottom: 3rem;
+    right:0.5rem;
+}
