@@ -18,3 +18,45 @@ content-type: application/json
 
 GET http://localhost:3001/proyects/sicard6
 content-type: application/json
+
+###
+
+//POST Proyect
+
+POST http://localhost:3001/proyects
+content-type: application/json
+
+    {
+    "ProyectName":"MyProyect2",
+    "AdminProyect":"sicard6",
+    "Associates":[],
+    "TaskBoards":[]
+    }
+
+###
+
+//DELETE Proyect By nameProyect and AdminProyect
+DELETE http://localhost:3001/proyects/sicard6/MyProyect2
+content-type: application/json
+
+
+###
+
+//PUT add TaskBoard given the AdminProyect and the ProyectName
+
+PUT http://localhost:3001/proyects/sicard6/MyProyect2/addTaskBoard
+content-type: application/json
+
+    {
+        "name": "hola",
+        "Tasks": []
+    }
+###
+
+//PUT add Assosiate given the AdminProyect and the ProyectName
+
+PUT http://localhost:3001/proyects/sicard6/MyProyect2/addAssociate/david55
+content-type: application/json
+
+
+

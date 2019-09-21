@@ -1,44 +1,39 @@
 import React, { Component } from 'react';
-import {Switch, Route} from "react-router-dom";
-import Board from "../components/boardComponents/Board";
-import Login from "../components/Auth/Login";
-
-
+import { Switch, Route } from 'react-router-dom';
+import Board from '../components/boardComponents/Board';
+import Login from '../components/Auth/Login';
+import MyProyects from '../components/MyProyects/MyProyects';
 
 class Router extends Component {
+	state = {
+		user: ''
+	};
 
-    state = {
-        user: ""
-    }
+	handleAuth = user => {
+		this.setState({
+			user: user
+		});
+	};
 
-    handleAuth = (user) =>{
-        this.setState({
-            user: user
-        })
-    }
-
-    render() {
-        return (
-            <div>
-                <Switch>
-                    <Route
-                        exact
-                        path ="/"
-                        render = { () => (
-                            <Login userf = {this.handleAuth}/>
-                        )}
-                    />
-                    <Route
-                        path ="/board"
-                        render = { () => (
-                            <Board user = {this.state.user}/>
-                        )}
-                    />
-                </Switch>
-
-            </div>
-        );
-    }
+	render() {
+		return (
+			<div>
+				<Switch>
+					<Route
+						exact
+						path="/"
+						render={() => <Login userf={this.handleAuth} />}
+					/>
+					<Route path="/myproyects" 
+                            render={() => <MyProyects user = {this.state.user}/>} />
+					<Route
+						path="/board"
+						render={() => <Board user={this.state.user} />}
+					/>
+				</Switch>
+			</div>
+		);
+	}
 }
 
 export default Router;

@@ -3,10 +3,10 @@ import { withRouter } from 'react-router-dom';
 
 class Login extends Component {
 	//TODO Login con back
-	clickBack = () => {
+	clickLog = () => {
 		this.props.userf('Mateo');
 		this.props.history.push({
-			pathname: '/board',
+			pathname: '/myproyects',
 			correo: 'm.sicard10'
 		});
 	};
@@ -14,7 +14,7 @@ class Login extends Component {
 	render() {
 		return (
 			<div>
-				<button onClick={this.clickBack} className = "btn btn-primary"> hola </button>
+				<button onClick={this.clickLog} className = "btn btn-primary"> hola </button>
 			</div>
 		);
 	}
