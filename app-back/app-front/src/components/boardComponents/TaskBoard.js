@@ -18,7 +18,6 @@ class TaskBoard extends Component {
             name: "TaskAdded",
             description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel error quos, saepe ea quaerat quas. Corporis, praesentium, assumenda unde necessitatibus, minus ad dolorem molestias doloremque rem nisi illum ducimus? Id?"
         };
-
         let newtasks = this.state.tasks;
         newtasks.push(t);
         this.setState({
