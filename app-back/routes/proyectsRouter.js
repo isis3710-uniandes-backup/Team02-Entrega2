@@ -135,7 +135,6 @@ router.put('/:AdminProyect/:proyectName/addAssociate/:associate', function(req, 
 			.toArray((error, data) => {
 				if (!data) res.send([]);
 				if (error) throw error;
-				console.log('data', data)
 				let associates = data[0].Associates;
 				associates.push(req.params.associate);
 				let newAssociates = {
