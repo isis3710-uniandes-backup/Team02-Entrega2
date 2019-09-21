@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Board from '../components/boardComponents/Board';
 import Login from '../components/Auth/Login';
 import MyProyects from '../components/MyProyects/MyProyects';
+import SignIn from '../components/Auth/signIn';
 
 class Router extends Component {
 	state = {
@@ -23,6 +24,10 @@ class Router extends Component {
 						exact
 						path="/"
 						render={() => <Login userf={this.handleAuth} />}
+					/>
+					<Route
+						path="/signin"
+						render={() => <SignIn/>}
 					/>
 					<Route path="/myproyects" 
                             render={() => <MyProyects user = {this.state.user}/>} />

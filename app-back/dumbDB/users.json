@@ -1,1 +1,4 @@
-[{"userName": "sicard6","mail": "sicard6@gmail.com","password": "blabla"},{"userName": "david55","mail": "david55@gmail.com","password": "blabla"}]
+[
+  { "userName": "sicard6", "mail": "sicard6@gmail.com", "password": "blabla" },
+  { "userName": "david55", "mail": "david55@gmail.com", "password": "blabla" }
+]

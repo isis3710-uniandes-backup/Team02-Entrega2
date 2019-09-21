@@ -11,10 +11,17 @@ class Login extends Component {
 		});
 	};
 
+	clickSignIn = () =>{
+		this.props.history.push({
+			pathname: '/signin'
+		})
+	}
+
 	render() {
 		return (
 			<div>
 				<button onClick={this.clickLog} className = "btn btn-primary"> hola </button>
+				<button onClick={this.clickSignIn} className = "btn btn-primary"> SignIn </button>
 			</div>
 		);
 	}
