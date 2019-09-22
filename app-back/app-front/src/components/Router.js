@@ -43,7 +43,7 @@ class Router extends Component {
                             render={() => <MyProyects user = {this.state.user} proyectName= {this.handleProjectBoard}/>} />
 					<Route
 						path="/board"
-						render={() => <Board user={this.state.user} />}
+						render={() => <Board user={this.state.user} proyectName= {this.state.proyectName} adminProyect={this.state.adminProyect}/>}
 					/>
 				</Switch>
 			</div>
