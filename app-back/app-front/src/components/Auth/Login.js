@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
-//* Variables de URL
-const url = "http://localhost:3001";
+const axios = require('axios'); //Libreria axios
 
 class Login extends Component {
 	//TODO Login con back
@@ -12,21 +10,32 @@ class Login extends Component {
 	/**
 	 * * Las variables del estado son: uemail - Correo del usuario y upass - Contraseña digitada.
 	 */
+
 	state = {
 		uemail: "",
 		upass: ""
 	}	
 	
-	clickLog = (event) => {
+	getLogData = (user, pass) => {
+		try { return axios.get(`http://localhost:3001/users/${user}/${pass}`); }
+		catch (error) {console.error(`Error fatal trayendo los datos del login: ${error}`)}
+	};
+
+	clickLog = async (event) => {
 		//* Actualizar el componente sin dar refresh		
 		event.preventDefault();
 		console.log(`El Email ingresado fue: ${this.state.uemail} y el pass fue: ${this.state.upass}`);
 
 		//* Llamar al backend: Peticion traer los datos de inicio de sesión.
+		//* Llamada al backend con axios.
 
-		fetch(url + `/users/${this.state.uemail}/${this.state.upass}`).then((res) => res.json()).then((data) => {
+		this.getLogData(this.state.uemail, this.state.upass).then(res => {
+			let data = res.data;
 			if (data.length === 0) return alert("The email and password doesn't match with any registered user, check the credentials");
-			let user_data = data[0]; //* El backend retorna el objeto sobre un arreglo.
+			console.log(`Los datos obtenidos del usuario son: ${data}`);
+
+			//* Actualizar el nombre de usuario con el estado padre.
+			let user_data = data[0]; //Datos del usuario.
 			this.props.userf(user_data.userName); //* El atributo userName contiene el nombre del usuario, cambiar el nombre del usuario en la app.
 			this.props.history.push ({ //* Actualizar la vista.
 				pathname: '/myproyects',

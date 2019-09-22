@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
-const url = "http://localhost:3001";
+const axios = require('axios'); //Libreria axios
 
 class signIn extends Component {
 
@@ -14,30 +13,24 @@ class signIn extends Component {
 
     state = {username:"", email:"", password:""}
 
-    //* Realiza el registro en la base de datos para el nuevo usuario
+    //* Realiza el registro en la base de datos para el nuevo usuario.
+    //* @param data - Objeto con los datos del nuevo usuario userName, mail, password.
 
-    clickRegister = () => {
+    registerUser = (data) => {
+        console.log(`Register data ${data}`);
+        try { return axios.post("http://localhost:3001/users", data)}
+        catch (error) {console.error(`Error realizando el post de los datos: ${error}`)}
+    };
+
+    clickRegister = async () => {
         console.log(`Username: ${this.state.username}, email: ${this.state.email}, pass: ${this.state.password}`);
-        
-        //* Realizar el llamado al backend.
-        
-        let details = { //Detalles y cuerpo de la petición
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({userName: this.state.username, mail: this.state.email, password: this.state.password})
-        };
-
-        fetch(url + "/users", details).then(res => res.json()).then(data => {
-            console.log(`Petición realizada, mensaje de respuesta: ${data}`)
-            //alert("Petición realizada") //TODO Verificar el funcionamiento de esto mañana
-        });
-
-        this.props.history.push({ //Enviar de regreso al login
-			pathname: '/' 
-		})
+        //* Registrar el usuario
+        this.registerUser(this.state).then(res => {
+            console.log("El usuario ha sido registrado satisfactoriamente");
+            this.props.history.push({ //Enviar de regreso al login
+                pathname: '/' 
+            });
+        });        
     };
 
     render() {
