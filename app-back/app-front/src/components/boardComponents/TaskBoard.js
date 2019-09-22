@@ -17,7 +17,7 @@ class TaskBoard extends Component {
   };
 
   add = () => {
-    var url = "http://localhost:3001/proyects/"+this.state.admin + "/" + this.state.proyectName + "/addTask/" + this.state.index;
+    var url = "/proyects/"+this.state.admin + "/" + this.state.proyectName + "/addTask/" + this.state.index;
     console.log(url);
     var data = {
       index: 0,
