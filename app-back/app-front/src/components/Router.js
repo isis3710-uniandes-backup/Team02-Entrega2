@@ -18,7 +18,7 @@ class Router extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="container-fluid">
 				<Switch>
 					<Route
 						exact
