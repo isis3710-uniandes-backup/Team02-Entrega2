@@ -14,9 +14,9 @@ content-type: application/json
 
 ###
 
-//GET proyect by AdminProyect
+//GET proyect by user
 
-GET http://localhost:3001/proyects/sicard6
+GET http://localhost:3001/proyects/david55
 content-type: application/json
 
 ###
@@ -36,6 +36,7 @@ content-type: application/json
 ###
 
 //DELETE Proyect By nameProyect and AdminProyect
+///:AdminProyect/:proyectName
 DELETE http://localhost:3001/proyects/sicard6/MyProyect2
 content-type: application/json
 
@@ -43,6 +44,7 @@ content-type: application/json
 ###
 
 //PUT add TaskBoard given the AdminProyect and the ProyectName
+///:AdminProyect/:proyectName/addTaskBoard
 
 PUT http://localhost:3001/proyects/sicard6/MyProyect2/addTaskBoard
 content-type: application/json
@@ -55,6 +57,7 @@ content-type: application/json
 ###
 
 //PUT DELETE TaskBoard given the AdminProyect and the ProyectName
+///:AdminProyect/:proyectName/DeleteTaskBoard/:name
 
 PUT http://localhost:3001/proyects/sicard6/MyProyect2/DeleteTaskBoard/hola2
 content-type: application/json
@@ -62,6 +65,7 @@ content-type: application/json
 ###
 
 //PUT add Assosiate given the AdminProyect and the ProyectName
+///:AdminProyect/:proyectName/addAssociate/:associate
 
 PUT http://localhost:3001/proyects/sicard6/MyProyect2/addAssociate/david55
 content-type: application/json
@@ -69,8 +73,33 @@ content-type: application/json
 ###
 
 //PUT delete Assosiate given the AdminProyect and the ProyectName
+///:AdminProyect/:proyectName/deleteAssociate/:associate
 PUT http://localhost:3001/proyects/sicard6/MyProyect2/deleteAssociate/david55
 content-type: application/json
+
+###
+
+//PUT add task given the AdminProyect, the ProyectName and the index of the taskBoard
+///:AdminProyect/:proyectName/addTask/:TaskBoardIndex
+PUT http://localhost:3001/proyects/sicard6/MyProyect2/addTask/0
+content-type: application/json
+    
+    {
+        "name": "TaskTest",
+        "description": "descriptionTest",
+        "onCharge":[],
+        "timeSpent":[]
+    }
+###
+
+//PUT Delete task given the AdminProyect, the ProyectName, the index of the taskBoard and the index of the task
+///:AdminProyect/:proyectName/deletetask/:TaskBoardIndex/:TaskIndex
+
+PUT http://localhost:3001/proyects/sicard6/MyProyect2/deletetask/0/0
+content-type: application/json
+
+
+
 
 
 
