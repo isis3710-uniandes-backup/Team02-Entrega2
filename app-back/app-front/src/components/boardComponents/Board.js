@@ -12,7 +12,7 @@ class Board extends Component {
     }
 
     componentDidMount() {
-        //TODO solo traer el rpoyecto actual del usuario actual
+        //TODO solo traer el proyecto actual del usuario actual
         fetch("/proyects").then(async (resp) => {
             let t = await resp.json();
             console.log(t);
@@ -26,7 +26,23 @@ class Board extends Component {
     }
 
     remove = (indexBoard, indexTask) => {
-        //TODO Remove from DB
+        var url = "/proyects/"+this.state.admin + "/" + this.state.name + "/deletetask/" + indexBoard + "/" + indexTask;
+    var data = {
+      index: indexTask,
+      indexP: indexBoard,
+    };
+
+    fetch(url, {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .catch(error => console.error("Error:", error))
+      .then(response => console.log("Success:", response));
+
         let newState = this.state.TaskBoards;
         let tasks = newState[indexBoard].Tasks;
         tasks.splice(indexTask, 1);

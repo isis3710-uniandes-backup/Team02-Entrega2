@@ -18,16 +18,15 @@ class TaskBoard extends Component {
 
   add = () => {
     var url = "/proyects/"+this.state.admin + "/" + this.state.proyectName + "/addTask/" + this.state.index;
-    console.log(url);
     var data = {
-      index: 0,
+      index: this.state.tasks.length+1,
       indexP: this.state.index,
       name: this.state.value1,
       description: this.state.value2,
       onCharge: [this.state.value3],
       timeSpent: []
     };
-
+    console.log(data.index);
     fetch(url, {
       method: "PUT",
       body: JSON.stringify(data),
@@ -39,19 +38,19 @@ class TaskBoard extends Component {
       .catch(error => console.error("Error:", error))
       .then(response => console.log("Success:", response));
 
-    let t = {
-      index: this.state.tasks.length,
-      indexP: this.state.index,
-      name: this.state.value1,
-      description: this.state.value2,
-      onCharge:[this.state.value3]
-    };
-    console.log(t.onCharge);
-    let newtasks = this.state.tasks;
-    newtasks.push(t);
-    this.setState({
-      tasks: newtasks
-    });
+      let t = {
+        index: this.state.tasks.length,
+        indexP: this.state.index,
+        name: this.state.value1,
+        description: this.state.value2,
+        onCharge:[this.state.value3],
+        timeSpent:[]
+      };
+      let newtasks = this.state.tasks;
+      newtasks.push(t);
+      this.setState({
+        tasks: newtasks
+      });
   };
 
   onChangeValue = event => {
