@@ -1,32 +1,43 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
-//* Variables de URL
-const url = "http://localhost:3001";
+const axios = require('axios'); //Libreria axios
 
 class Login extends Component {
-	//TODO Login con back
-	//TODO Verificar la información con el backend y verificar que sea veridica.
-	//TODO Actualizar el nombre de usuario con el obtenido.		
-
+	
 	/**
-	 * * Las variables del estado son: uemail - Correo del usuario y upass - Contraseña digitada.
+	 * * Las variables del estado son: uname - Nombre de usuario y upass - Contraseña digitada.
 	 */
+
 	state = {
-		uemail: "",
+		uname: "",
 		upass: ""
 	}	
 	
-	clickLog = (event) => {
+	getLogData = (user, pass) => {
+		try { return axios.get(`/users/${user}/${pass}`); }
+		catch (error) {console.error(`Error fatal trayendo los datos del login: ${error}`)}
+	};
+
+	clickLog = async (event) => {
 		//* Actualizar el componente sin dar refresh		
 		event.preventDefault();
-		console.log(`El Email ingresado fue: ${this.state.uemail} y el pass fue: ${this.state.upass}`);
+		console.log(`El Email ingresado fue: ${this.state.uname} y el pass fue: ${this.state.upass}`);
+
+		if (this.state.uname.length === 0) return alert("Please enter your username");
+		if (this.state.upass.length === 0) return alert("Please enter your password");
 
 		//* Llamar al backend: Peticion traer los datos de inicio de sesión.
+		//* Llamada al backend con axios.
 
-		fetch(url + `/users/${this.state.uemail}/${this.state.upass}`).then((res) => res.json()).then((data) => {
+		this.getLogData(this.state.uname, this.state.upass).then(res => {
+			console.log(res);
+			let data = res.data;
+			console.log(data)
 			if (data.length === 0) return alert("The email and password doesn't match with any registered user, check the credentials");
-			let user_data = data[0]; //* El backend retorna el objeto sobre un arreglo.
+			console.log(`Los datos obtenidos del usuario son: ${data}`);
+
+			//* Actualizar el nombre de usuario con el estado padre.
+			let user_data = data[0]; //Datos del usuario.
 			this.props.userf(user_data.userName); //* El atributo userName contiene el nombre del usuario, cambiar el nombre del usuario en la app.
 			this.props.history.push ({ //* Actualizar la vista.
 				pathname: '/myproyects',
@@ -49,15 +60,15 @@ class Login extends Component {
 				</div>
 				<form className="titleFormSpace">
 					<div className="form-group">
-						<label>User's Email</label>
-						<input type="email" name="uEmail" className="form-control" id="userEmail" aria-describedby="emailHelp" placeholder="Enter your user's email" onChange={(evt) => this.setState({uemail: evt.target.value})} required/>						
+						<label>Username</label>
+						<input type="text" name="uName" className="form-control" id="userName" aria-describedby="emailHelp" placeholder="Enter your username" onChange={(evt) => this.setState({uname: evt.target.value})} required/>						
 					</div>
 					<div className="form-group">
 						<label>Password</label>						
 						<input type="password" name="uPass" className="form-control" id="userPass" placeholder="User's account password" onChange={(evt) => this.setState({upass: evt.target.value})} required/>
 					</div>		
 					<div className="row button-row">
-						<button type="button" onClick={this.clickLog} className="btn btn-success logButtonSpace"> Log In </button>					
+						<button type="button" onClick={this.clickLog} className="btn btn-primary logButtonSpace"> Log In </button>					
 						<button type="button" onClick={this.clickSignIn} className="btn btn-secondary">Sign In</button>
 					</div>
 				</form>
