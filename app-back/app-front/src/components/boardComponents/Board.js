@@ -11,6 +11,7 @@ class Board extends Component {
     componentDidMount() {
         fetch("/proyects").then(async (resp) => {
             let t = await resp.json();
+            console.log(t);
             this.setState({
                 TaskBoards: t[0].TaskBoards
             });
@@ -19,6 +20,7 @@ class Board extends Component {
     }
 
     remove = (indexBoard, indexTask) => {
+        //TODO Remove from DB
         let newState = this.state.TaskBoards;
         let tasks = newState[indexBoard].Tasks;
         tasks.splice(indexTask, 1);
@@ -41,7 +43,7 @@ class Board extends Component {
                 <div className="container-fluid">
                     <div className="row">
                         {
-                            this.state.TaskBoards.map((e, i) => <TaskBoard value={e} functions={[this.remove]} key={e.name} />)
+                            this.state.TaskBoards.map((e, i) => <TaskBoard user={this.props.user} value={e} functions={[this.remove]} key={e.name} />)
                         }
                     </div>
                 </div>
