@@ -17,7 +17,6 @@ class signIn extends Component {
     //* @param data - Objeto con los datos del nuevo usuario userName, mail, password.
 
     registerUser = (data) => {
-        console.log(`Register data ${data}`);
         try { return axios.post("/users", data)}
         catch (error) {console.error(`Error realizando el post de los datos: ${error}`)}
     };
@@ -36,13 +35,12 @@ class signIn extends Component {
             return alert(`There are ${empty} field in the form to complete, all field are required`);
         }
 
-        console.log(`Username: ${this.state.userName}, email: ${this.state.mail}, pass: ${this.state.password}`);
         //* Registrar el usuario
         this.registerUser(this.state).then(res => {
-            console.log("El usuario ha sido registrado satisfactoriamente");
             this.props.history.push({ //Enviar de regreso al login
                 pathname: '/' 
             });
+            return alert(`The user ${this.state.userName} has been created succesfully`);
         });        
     };
 
