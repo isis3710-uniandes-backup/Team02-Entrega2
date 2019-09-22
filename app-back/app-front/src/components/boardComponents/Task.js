@@ -34,7 +34,7 @@ class Task extends Component {
               {this.state.timeSpent.map((e,i)=>(
                   <div key = {e.UserName}>{e.UserName} = {e.timeSec}</div> 
               ))}
-              <h3>Llevar tiempo:</h3>{this.state.user} => <Timer/>
+              <h3>Llevar tiempo:</h3>{this.state.user} => < Timer index = {this.state.index} indexP = {this.state.indexP} functions={this.state.functions} />
             </div>
           </div>
           <button

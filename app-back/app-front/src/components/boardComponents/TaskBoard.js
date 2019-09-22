@@ -17,8 +17,8 @@ class TaskBoard extends Component {
   };
 
   add = () => {
-    var url = "/proyects/"+this.state.admin + "/" + this.state.proyectName + "/addTask/" + this.state.index;
-    var data = {
+    let url = "/proyects/"+this.state.admin + "/" + this.state.proyectName + "/addTask/" + this.state.index;
+    let data = {
       index: this.state.tasks.length+1,
       indexP: this.state.index,
       name: this.state.value1,
@@ -34,8 +34,7 @@ class TaskBoard extends Component {
       }
     })
       .then(res => res.json())
-      .catch(error => console.error("Error:", error))
-      .then(response => console.log("Success:", response));
+      .catch(error => console.error("Error:", error));
 
       let t = {
         index: this.state.tasks.length,
@@ -94,6 +93,19 @@ class TaskBoard extends Component {
               {" "}
               Add
             </button>
+
+            <button
+            onClick={() => {
+              this.state.functions[1](
+                this.state.index,
+                this.state.name
+              );
+            }}
+            type="button"
+            className="btn btn-danger float-right"
+          >
+            Remove
+          </button>
             <div
               className="modal fade"
               id={v}

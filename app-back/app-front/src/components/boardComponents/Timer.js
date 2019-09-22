@@ -5,7 +5,10 @@ class Timer extends React.Component {
     this.state = {
       time: 0,
       isOn: false,
-      start: 0
+      start: 0,
+      functions: this.props.functions,
+      index:this.props.index,
+      indexP: this.props.indexP
     }
     this.startTimer = this.startTimer.bind(this)
     this.stopTimer = this.stopTimer.bind(this)
@@ -29,22 +32,24 @@ class Timer extends React.Component {
     this.setState({time: 0, isOn: false})
   }
   render() {
-    // eslint-disable-next-line
-    let start = (this.state.time == 0) ?
+
+    let start = (this.state.time === 0) ?
       <button onClick={this.startTimer}>start</button> :
       null
-      // eslint-disable-next-line
-    let stop = (this.state.time == 0 || !this.state.isOn) ?
+
+    let stop = (this.state.time === 0 || !this.state.isOn) ?
       null :
       <button onClick={this.stopTimer}>stop</button>
-      // eslint-disable-next-line
-    let resume = (this.state.time == 0 || this.state.isOn) ?
+
+    let resume = (this.state.time === 0 || this.state.isOn) ?
       null :
       <button onClick={this.startTimer}>resume</button>
-      // eslint-disable-next-line
-    let reset = (this.state.time == 0 || this.state.isOn) ?
+    let reset = (this.state.time === 0 || this.state.isOn) ?
       null :
       <button onClick={this.resetTimer}>reset</button>
+      let submit = (this.state.time === 0 || this.state.isOn) ?
+      null :
+      <button onClick={this.state.functions[2](this.state.indexP,this.state.index,this.state.time/1000)}>submit</button>
     return(
       <div>
         <h3>timer: {this.state.time/1000}s</h3>
@@ -52,6 +57,7 @@ class Timer extends React.Component {
         {resume}
         {stop}
         {reset}
+        {submit}
       </div>
     )
   }
