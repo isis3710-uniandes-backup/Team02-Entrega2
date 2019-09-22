@@ -62,7 +62,7 @@ class MyProyects extends Component {
 
         let project = {
             "ProyectName": name,
-            "AdminProyect": "sicard6",
+            "AdminProyect": this.state.user,
             "Associates": associates,
             "TaskBoards": []
 
