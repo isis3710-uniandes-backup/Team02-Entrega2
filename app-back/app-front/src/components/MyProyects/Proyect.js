@@ -14,7 +14,7 @@ class Proyect extends Component {
     }
 
     handleClick = () => {
-        axios.delete('/proyects/sicard6/' + this.state.name);
+        axios.delete(`/proyects/${this.state.adminProyect}/${this.state.name}`);
         this.props.action();
         this.setState({ existe: false });
         this.setState({ state: this.state });

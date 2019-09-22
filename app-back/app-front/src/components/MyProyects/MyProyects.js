@@ -29,8 +29,7 @@ class MyProyects extends Component {
 
     clickBoard = () => {
         this.props.history.push({
-            pathname: '/board',
-            correo: 'm.sicard10'
+            pathname: '/board'
         });
     };
 
@@ -81,7 +80,8 @@ class MyProyects extends Component {
     }
 
     refreshProjects = () => {
-        fetch("/proyects/sicard6") //Cambair para que no este quemado sicard
+        let url = `/proyects/${this.state.user}`;
+        fetch(url) //Cambair para que no este quemado sicard
             .then(res => res.json())
             .then(res => {
                 //console.log(res);
