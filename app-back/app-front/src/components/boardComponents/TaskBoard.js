@@ -26,7 +26,6 @@ class TaskBoard extends Component {
       onCharge: [this.state.value3],
       timeSpent: []
     };
-    console.log(data.index);
     fetch(url, {
       method: "PUT",
       body: JSON.stringify(data),
