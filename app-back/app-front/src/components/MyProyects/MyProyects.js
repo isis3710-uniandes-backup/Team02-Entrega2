@@ -14,17 +14,17 @@ class MyProyects extends Component {
     }
 
     componentDidMount() {
-        //let url = "/proyects/" + this.state.user.userName ;
+        let url = "/proyects/" + this.state.user ;
         // Cuando ya sirva bien el login, se utilizará la variable URL para que encuentre los proyectos del usuario que se loggeo
         //console.log("url: " + url);
-        fetch("/proyects/sicard6")
+        fetch(url)
             .then(res => res.json())
             .then(res => {
-                console.log(res);
+                //console.log(res);
                 this.setState({ projects: res });
-                console.log(this.state.projects)
+                //console.log(this.state.projects)
             });
-        console.log("Usuario: " + this.state.user);
+        //console.log("Usuario: " + this.state.user);
     }
 
     clickBoard = () => {
@@ -50,15 +50,15 @@ class MyProyects extends Component {
     }
 
     createProjectJSON(callback) {
-        console.log("ENTERS FUNCTION");
+        //console.log("ENTERS FUNCTION");
         let name = document.getElementById("defaultForm-name").value;
-        console.log("Nombre: " + name);
+        //console.log("Nombre: " + name);
         let associates = [];
         for (let i = 0; i < this.state.numAsociados; i++) {
             associates.push(document.getElementById(i).value)
         }
 
-        console.log(associates);
+        //console.log(associates);
 
         let project = {
             "ProyectName": name,
@@ -74,7 +74,7 @@ class MyProyects extends Component {
         this.createProjectJSON((project) => {
             axios.post('/proyects', project)
                 .then(res => {
-                    console.log(res);
+                    //console.log(res);
                     callback();
                 });
         })
@@ -84,16 +84,16 @@ class MyProyects extends Component {
         fetch("/proyects/sicard6") //Cambair para que no este quemado sicard
             .then(res => res.json())
             .then(res => {
-                console.log(res);
+                //console.log(res);
                 this.setState({ projects: res });
-                console.log(this.state.projects)
+                //console.log(this.state.projects)
                 this.setState({ state: this.state });
             });
 
     }
 
     render() {
-        console.log(this.props)
+        //console.log(this.props)
 
         let arr = [];
         for (let i = 0; i < this.state.numAsociados; i++) {
@@ -106,43 +106,48 @@ class MyProyects extends Component {
                     <h1> {this.state.user}'s Projects </h1>
                 </div>
                 <div className="card-columns">
-                    {this.state.projects.map(e => <Proyect value={e} action={this.refreshProjects} />)}
+                    {this.state.projects.map((e, index) => <Proyect key={index} user={this.state.user} value={e} action={this.refreshProjects} proyect={this.props.proyectName} />)}
                 </div>
 
 
-                <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                <div className="modal fade" id="modalLoginForm" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel"
                     aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header text-center">
-                                <h4 class="modal-title w-100 font-weight-bold">Create project</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header text-center">
+                                <h4 className="modal-title w-100 font-weight-bold">Create project</h4>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body mx-3">
-                                <div class="md-form mb-5">
-                                    <i class="fas fa-envelope prefix grey-text"></i>
-                                    <label data-error="wrong" data-success="right" for="defaultForm-email">Name</label>
-                                    <input type="text" id="defaultForm-name" class="form-control validate"></input>
+                            <div className="modal-body mx-3">
+                                <div className="md-form mb-5">
+                                    <i className="fas fa-envelope prefix grey-text"></i>
+                                    <label data-error="wrong" data-success="right" htmlFor="defaultForm-email">Name</label>
+                                    <input type="text" id="defaultForm-name" className="form-control validate"></input>
 
                                 </div>
-                                <div class="md-form mb-4">
-                                    <i class="fas fa-lock prefix grey-text"></i>
-
-                                    <label data-error="wrong" data-success="right" for="defaultForm-pass">Associates</label>
-                                    <div className="text-right">
-                                        <button className="btn-sm btn-warning" id="btn-add" onClick={this.addAsociate}>Add</button>
+                                <div className="md-form mb-4">
+                                    <div className="row">
+                                        <div className="col-10">
+                                            <i className="fas fa-lock prefix grey-text"></i>
+                                            <label data-error="wrong" data-success="right" htmlFor="defaultForm-pass">Associates</label>
+                                        </div>
+                                        <div className="col-2">
+                                            <div className="text-right">
+                                                <button className="btn-sm btn-warning" id="btn-add" onClick={this.addAsociate}>Add</button>
+                                            </div>
+                                        </div>
                                     </div>
-
+                                    <br></br>
                                     {arr.map((value, index) => {
-                                        return <div><input type="text" id={index} class="form-control validate"></input><br></br></div>
+                                        return <div><input type="text" id={index} className="form-control validate"></input><br></br></div>
                                     })}
 
                                 </div>
                             </div>
-                            <div class="modal-footer d-flex justify-content-center">
-                                <button class="btn btn-success" id="btn-create" onClick={this.sendPostProject} data-dismiss="modal" > Create</button>
+                            <div className="modal-footer d-flex justify-content-center">
+                                <button className="btn btn-success" id="btn-create" onClick={this.sendPostProject} data-dismiss="modal" > Create</button>
                             </div>
                         </div>
                     </div>
@@ -150,9 +155,9 @@ class MyProyects extends Component {
 
 
                 <div id="addProject" className="">
-                    <a href="" className="btn bg-primary btn-circle btn-xl" data-toggle="modal" data-target="#modalLoginForm"><h1 className="text-white">+</h1></a>
+                    <button className="btn bg-primary btn-circle btn-xl" data-toggle="modal" data-target="#modalLoginForm"><h1 className="text-white">+</h1></button>
                 </div>
-            </div >
+            </div>
         )
     }
 }
