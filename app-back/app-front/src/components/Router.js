@@ -7,7 +7,9 @@ import SignIn from '../components/Auth/signIn';
 
 class Router extends Component {
 	state = {
-		user: ''
+		user: '',
+		proyectName: '',
+		adminProyect: ''
 	};
 
 	handleAuth = user => {
@@ -15,6 +17,14 @@ class Router extends Component {
 			user: user
 		});
 	};
+
+	handleProjectBoard = (user, proyectName, adminProyect) => {
+		this.setState({
+			user: user,
+			adminProyect: adminProyect,
+			proyectName: proyectName 
+		});
+	}
 
 	render() {
 		return (
@@ -30,7 +40,7 @@ class Router extends Component {
 						render={() => <SignIn/>}
 					/>
 					<Route path="/myproyects" 
-                            render={() => <MyProyects user = {this.state.user}/>} />
+                            render={() => <MyProyects user = {this.state.user} proyectName= {this.handleProjectBoard}/>} />
 					<Route
 						path="/board"
 						render={() => <Board user={this.state.user} />}
