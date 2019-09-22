@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 const axios = require('axios');
+
+
+
 class Proyect extends Component {
     state = {
         name: this.props.value.ProyectName,
@@ -13,7 +17,20 @@ class Proyect extends Component {
         axios.delete('/proyects/sicard6/' + this.state.name);
         this.props.action();
         this.setState({ existe: false });
-        this.setState({state : this.state});
+        this.setState({ state: this.state });
+    }
+
+    clickBoard = () => {
+        this.props.proyect(this.props.user, this.state.name, this.state.adminProyect);
+        this.props.history.push({
+            pathname: '/board',
+        });
+    }
+
+    checkDelete = () => {
+        if(this.state.adminProyect === this.props.user){
+            return <button className="btn-sm btn-danger" onClick={this.handleClick}>Delete</button>
+        }
     }
 
     render() {
@@ -32,17 +49,13 @@ class Proyect extends Component {
                                 <h4>{this.state.name}</h4>
                             </div>
                             <div className="col-6" align="right">
-                                <button className="close" className="btn-sm" onClick={this.handleClick}>
-                                    
-                                </button>
+                                {this.checkDelete()}
                             </div>
-
-
                         </div>
                         <div className="card-body">
                             <p> Project Administrator: {this.state.adminProyect} </p>
                         </div>
-                        <button onClick={this.handleClick} type="button" className="btn btn-outline-primary float-right">Tasks</button>
+                        <button type="button" className="btn btn-outline-primary float-right" onClick={this.clickBoard}>Board</button>
                     </div>
                 </div>
             );
@@ -51,4 +64,4 @@ class Proyect extends Component {
 }
 
 
-export default Proyect;
+export default withRouter(Proyect);
