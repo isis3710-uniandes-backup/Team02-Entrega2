@@ -21,7 +21,6 @@ class Login extends Component {
 	clickLog = async (event) => {
 		//* Actualizar el componente sin dar refresh		
 		event.preventDefault();
-		console.log(`El Email ingresado fue: ${this.state.uname} y el pass fue: ${this.state.upass}`);
 
 		if (this.state.uname.length === 0) return alert("Please enter your username");
 		if (this.state.upass.length === 0) return alert("Please enter your password");
@@ -30,11 +29,8 @@ class Login extends Component {
 		//* Llamada al backend con axios.
 
 		this.getLogData(this.state.uname, this.state.upass).then(res => {
-			console.log(res);
 			let data = res.data;
-			console.log(data)
 			if (data.length === 0) return alert("The email and password doesn't match with any registered user, check the credentials");
-			console.log(`Los datos obtenidos del usuario son: ${data}`);
 
 			//* Actualizar el nombre de usuario con el estado padre.
 			let user_data = data[0]; //Datos del usuario.
