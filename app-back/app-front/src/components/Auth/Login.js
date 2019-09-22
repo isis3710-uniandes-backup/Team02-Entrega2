@@ -37,7 +37,7 @@ class Login extends Component {
 						<button type="button" onClick={this.clickSignIn} className="btn btn-secondary">Sign In</button>
 					</div>
 				</form>
-			</div>
+			</div>		
 		);
 	}
 }
