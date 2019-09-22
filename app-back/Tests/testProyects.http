@@ -98,6 +98,27 @@ content-type: application/json
 PUT http://localhost:3001/proyects/sicard6/MyProyect2/deletetask/0/0
 content-type: application/json
 
+###
+
+//PUT Assign task given the AdminProyect, the ProyectName, the index of the taskBoard and the index of the task
+///:AdminProyect/:proyectName/:TaskBoardIndex/:TaskIndex/assign/:name
+PUT http://localhost:3001/proyects/sicard6/MyProyect2/0/0/assign/lucas
+content-type: application/json
+
+###
+
+//PUT add time to a task given the AdminProyect, proyectName, TaskBoardIndex and TaskIndex.
+//if there is already a user with time on that task, it will add the time passed on the body.
+///:AdminProyect/:proyectName/:TaskBoardIndex/:TaskIndex/addTime
+
+PUT http://localhost:3001/proyects/sicard6/MyProyect2/0/0/addTime
+content-type: application/json
+
+    {
+        "UserName": "andres",
+        "timeSec": 1200
+    }
+
 
 
 

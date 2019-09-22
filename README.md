@@ -1,9 +1,12 @@
 # Team02-Entrega2
 
+# :timer_clock: TASK TIME RECORDER :timer_clock:
 
-## (づ￣ 3￣)づ
+## (づ￣ 3￣)づ 🌵
 
-## (* ￣3)(ε￣ *)
+## (* ￣3) ❤️ (ε￣ *)
+
+## ⏰⏰⏰⏰⏱⏱⏱
 ------
 ## How To run
 
@@ -13,6 +16,11 @@
 * nodemon (`npm install nodemon`)
 * mongodb .
 * (optional) mongo compass. 
+
+**Instructions for the DB**
+
+* you should have one DB called `MyTimeDB` and also two collections inside that DB called `users` and `proyects`.
+* in the folder `/dumbDB` you'll find `toimport.txt` that has all the comands to import the `.json` that are in the folder. they are just a cuple of documents to make sure that the app works correctly.
 
 **Instructions to run**
 
