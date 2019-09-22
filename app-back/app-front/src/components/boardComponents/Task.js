@@ -30,11 +30,11 @@ class Task extends Component {
             <div className="card card-body">
             On charge:
               {/* {this.state.onCharge.map((e,i)=>(
-                  <div>{e.des}</div> 
+                  <div key = {e}>{e}</div> 
               ))} */}
               Time spent:
               {/* {this.state.timeSpent.map((e,i)=>(
-                  <div>{e.UserName} = {e.timeSec}</div> 
+                  <div key = {e.UserName}>{e.UserName} = {e.timeSec}</div> 
               ))} */}
               <h3>Llevar tiempo:</h3>{this.state.user} => <Timer/>
             </div>

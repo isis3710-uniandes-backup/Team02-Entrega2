@@ -6,21 +6,47 @@ class TaskBoard extends Component {
   state = {
     value1: "",
     value2: "",
+    value3: this.props.user,
     name: this.props.value.name,
     tasks: this.props.value.Tasks,
     index: this.props.value.index,
-    functions: this.props.functions
+    functions: this.props.functions,
+    admin: this.props.admin,
+    associates: this.props.associates,
+    proyectName: this.props.name
   };
 
   add = () => {
-    //TODO Add to database
+    var url = "http://localhost:3001/proyects/"+this.state.admin + "/" + this.state.proyectName + "/addTask/" + this.state.index;
+    console.log(url);
+    var data = {
+      index: 0,
+      indexP: this.state.index,
+      name: this.state.value1,
+      description: this.state.value2,
+      onCharge: [this.state.value3],
+      timeSpent: []
+    };
+
+    fetch(url, {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .catch(error => console.error("Error:", error))
+      .then(response => console.log("Success:", response));
+
     let t = {
       index: this.state.tasks.length,
       indexP: this.state.index,
       name: this.state.value1,
-      description: this.state.value2
+      description: this.state.value2,
+      onCharge:[this.state.value3]
     };
-
+    console.log(t.onCharge);
     let newtasks = this.state.tasks;
     newtasks.push(t);
     this.setState({
@@ -32,14 +58,18 @@ class TaskBoard extends Component {
     this.setState({ value1: event.target.value });
   };
 
+
   onChangeValue2 = event => {
     this.setState({ value2: event.target.value });
+  };
+
+  onChangeValue3 = event => {
+    this.setState({ value3: event.target.value });
   };
 
   render() {
     let t = "#mod" + this.state.index;
     let v = "mod" + this.state.index;
-    console.log(this.props.user);
     return (
       <div className="col-4">
         <div className="card shadow-sm p-3 mb-5 bg-white rounded taskBoard">
@@ -49,7 +79,12 @@ class TaskBoard extends Component {
             </div>
             <div>
               {this.state.tasks.map((e, i) => (
-                <Task user={this.props.user} value={e} key={e.name} functions={this.state.functions} />
+                <Task
+                  user={this.props.user}
+                  value={e}
+                  key={e.name}
+                  functions={this.state.functions}
+                />
               ))}
             </div>
             <button
@@ -122,9 +157,13 @@ class TaskBoard extends Component {
                         >
                           On charge:
                         </label>
-                        <select defaultValue={this.props.user}>
-                          <option value>{this.props.user}</option>
-                          <option value>...</option>
+                        <select id="empid" 
+                          onChange={this.onChangeValue3}>
+                            <option value = " ">---</option>
+                          <option value = {this.state.admin}>{this.state.admin}</option>
+                          {this.state.associates.map((e,i)=>(
+                            <option value={e} key={e}>{e}</option>
+                          ))}
                         </select>
                       </div>
                     </form>
@@ -138,6 +177,7 @@ class TaskBoard extends Component {
                       Close
                     </button>
                     <button
+                      disabled={!(this.state.value2 && this.state.value1 && this.state.value3)}
                       type="button"
                       onClick={this.add}
                       className="btn btn-primary"

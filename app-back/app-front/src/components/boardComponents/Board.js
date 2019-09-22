@@ -5,15 +5,22 @@ import {withRouter} from "react-router-dom";
 
 class Board extends Component {
     state = {
-        TaskBoards: []
+        TaskBoards: [],
+        admin: '',
+        associates: [],
+        name: ''
     }
 
     componentDidMount() {
+        //TODO solo traer el rpoyecto actual del usuario actual
         fetch("/proyects").then(async (resp) => {
             let t = await resp.json();
             console.log(t);
             this.setState({
-                TaskBoards: t[0].TaskBoards
+                TaskBoards: t[0].TaskBoards,
+                admin: t[0].AdminProyect,
+                associates: t[0].Associates,
+                name: t[0].ProyectName
             });
         })
     }
@@ -42,7 +49,7 @@ class Board extends Component {
                 <div className="container-fluid">
                     <div className="row">
                         {
-                            this.state.TaskBoards.map((e, i) => <TaskBoard user={this.props.user} value={e} functions={[this.remove]} key={e.name} />)
+                            this.state.TaskBoards.map((e, i) => <TaskBoard name = {this.state.name} admin = {this.state.admin} associates={this.state.associates} user={this.props.user} value={e} functions={[this.remove]} key={e.name} />)
                         }
                     </div>
                 </div>
