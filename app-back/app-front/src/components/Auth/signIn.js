@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
-const url = "http://localhost:3001";
+const axios = require('axios'); //Libreria axios
 
 class signIn extends Component {
 
@@ -12,32 +11,39 @@ class signIn extends Component {
      * *password: Contraseña del usuario.
      */
 
-    state = {username:"", email:"", password:""}
+    state = {userName:"", mail:"", password:""}
 
-    //* Realiza el registro en la base de datos para el nuevo usuario
+    //* Realiza el registro en la base de datos para el nuevo usuario.
+    //* @param data - Objeto con los datos del nuevo usuario userName, mail, password.
 
-    clickRegister = () => {
-        console.log(`Username: ${this.state.username}, email: ${this.state.email}, pass: ${this.state.password}`);
-        
-        //* Realizar el llamado al backend.
-        
-        let details = { //Detalles y cuerpo de la petición
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({userName: this.state.username, mail: this.state.email, password: this.state.password})
-        };
+    registerUser = (data) => {
+        console.log(`Register data ${data}`);
+        try { return axios.post("/users", data)}
+        catch (error) {console.error(`Error realizando el post de los datos: ${error}`)}
+    };
 
-        fetch(url + "/users", details).then(res => res.json()).then(data => {
-            console.log(`Petición realizada, mensaje de respuesta: ${data}`)
-            //alert("Petición realizada") //TODO Verificar el funcionamiento de esto mañana
-        });
+    clickRegister = async () => {
 
-        this.props.history.push({ //Enviar de regreso al login
-			pathname: '/' 
-		})
+        //* Mirar si todos los datos del campo estan correctos.
+        let empty = 0;
+        for (const [key, value] of Object.entries(this.state)) {
+            console.log(`Clave: ${key}, valor: ${value}`);
+            if (value.length === 0) empty++;
+
+        }
+
+        if (empty > 0) {
+            return alert(`There are ${empty} field in the form to complete, all field are required`);
+        }
+
+        console.log(`Username: ${this.state.userName}, email: ${this.state.mail}, pass: ${this.state.password}`);
+        //* Registrar el usuario
+        this.registerUser(this.state).then(res => {
+            console.log("El usuario ha sido registrado satisfactoriamente");
+            this.props.history.push({ //Enviar de regreso al login
+                pathname: '/' 
+            });
+        });        
     };
 
     render() {
@@ -47,11 +53,11 @@ class signIn extends Component {
                 <form>
 					<div className="form-group">
 						<label>User name</label>
-						<input type="text" className="form-control" id="username" aria-describedby="User name" placeholder="Enter your user name" onChange={(evt) => this.setState({username: evt.target.value})} required/>						
+						<input type="text" className="form-control" id="username" aria-describedby="User name" placeholder="Enter your user name" onChange={(evt) => this.setState({userName: evt.target.value})} required/>						
 					</div>
 					<div className="form-group">
 						<label>User's Email</label>						
-						<input type="email" className="form-control" id="useremail" placeholder="Enter your email address" onChange={(evt) => this.setState({email: evt.target.value})} required/>
+						<input type="email" className="form-control" id="useremail" placeholder="Enter your email address" onChange={(evt) => this.setState({mail: evt.target.value})} required/>
 					</div>
                     <div className="form-group">
 						<label>Password</label>						
