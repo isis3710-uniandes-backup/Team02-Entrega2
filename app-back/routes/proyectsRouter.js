@@ -29,7 +29,7 @@ router.get("/:user", function(req, res, next) {
       .db(DB)
       .collection(COLLECTION)
       .find({
-        AdminProyect: req.params.user
+        $or:[{AdminProyect: req.params.user},{Associates: {$eq: req.params.user}}]
       })
       .toArray((error, data) => {
         res.send(data);
@@ -159,7 +159,7 @@ router.put("/:AdminProyect/:proyectName/DeleteTaskBoard/:name", function(
             taskBoards.splice(i, 1);
             break;
           }
-		}
+        }
 
         for (let i = 0; i < taskBoards.length; i++) {
           let taskBoard = taskBoards[i];
@@ -172,7 +172,7 @@ router.put("/:AdminProyect/:proyectName/DeleteTaskBoard/:name", function(
           }
         };
 
-		conn.then(client => {
+        conn.then(client => {
           client
             .db(DB)
             .collection(COLLECTION)
@@ -242,58 +242,210 @@ router.put("/:AdminProyect/:proyectName/addAssociate/:associate", function(
 
 /* PUT Modifica el proyecto eliminando un nuevo Asociado dado el AdminProyect y del ProyectName */
 router.put("/:AdminProyect/:proyectName/deleteAssociate/:associate", function(
-	req,
-	res,
-	next
-  ) {
-	conn.then(client => {
-	  client
-		.db(DB)
-		.collection(COLLECTION)
-		.find({
-		  AdminProyect: req.params.AdminProyect,
-		  ProyectName: req.params.proyectName
-		})
-		.toArray((error, data) => {
-		  if (!data) res.send([]);
-		  if (error) throw error;
-		  let associates = data[0].Associates;
-		  for (let i = 0; i < associates.length; i++) {
-			  let ass = associates[i];
-			  if(ass === req.params.associate){
-				  associates.splice(i,1);
-				  break;
-			  }
-		  }
+  req,
+  res,
+  next
+) {
+  conn.then(client => {
+    client
+      .db(DB)
+      .collection(COLLECTION)
+      .find({
+        AdminProyect: req.params.AdminProyect,
+        ProyectName: req.params.proyectName
+      })
+      .toArray((error, data) => {
+        if (!data) res.send([]);
+        if (error) throw error;
+        let associates = data[0].Associates;
+        for (let i = 0; i < associates.length; i++) {
+          let ass = associates[i];
+          if (ass === req.params.associate) {
+            associates.splice(i, 1);
+            break;
+          }
+        }
 
-		  let newAssociates = {
-			$set: {
-			  Associates: associates
-			}
-		  };
-		  conn.then(client => {
-			client
-			  .db(DB)
-			  .collection(COLLECTION)
-			  .updateOne(
-				{
-				  AdminProyect: req.params.AdminProyect,
-				  ProyectName: req.params.proyectName
-				},
-				newAssociates,
-				(err, data) => {
-				  if (err) throw err;
-				  res.send(data);
-				}
-			  );
-		  });
-		});
-	});
+        let newAssociates = {
+          $set: {
+            Associates: associates
+          }
+        };
+        conn.then(client => {
+          client
+            .db(DB)
+            .collection(COLLECTION)
+            .updateOne(
+              {
+                AdminProyect: req.params.AdminProyect,
+                ProyectName: req.params.proyectName
+              },
+              newAssociates,
+              (err, data) => {
+                if (err) throw err;
+                res.send(data);
+              }
+            );
+        });
+      });
   });
+});
 
 //-------------------------------------------------------------------------------------------------
 //* CRUD de los Task
 //-------------------------------------------------------------------------------------------------
+
+/* PUT Modifica el proyecto creando un nuevo Task dado el AdminProyect, el ProyectName y el indice del taskBoard */
+router.put("/:AdminProyect/:proyectName/addTask/:TaskBoardIndex", function(
+  req,
+  res,
+  next
+) {
+  conn.then(client => {
+    client
+      .db(DB)
+      .collection(COLLECTION)
+      .find({
+        AdminProyect: req.params.AdminProyect,
+        ProyectName: req.params.proyectName
+      })
+      .toArray((error, data) => {
+        if (!data) res.send([]);
+        if (error) throw error;
+        let proyect = data[0];
+        let taskBoards = proyect.TaskBoards;
+        let task = req.body;
+        task.index = taskBoards[req.params.TaskBoardIndex].Tasks.length;
+        task.indexP = Number(req.params.TaskBoardIndex);
+        taskBoards[req.params.TaskBoardIndex].Tasks.push(task);
+
+        let newTaskBoards = {
+          $set: {
+            TaskBoards: taskBoards
+          }
+        };
+
+        conn.then(client => {
+          client
+            .db(DB)
+            .collection(COLLECTION)
+            .updateOne(
+              {
+                AdminProyect: req.params.AdminProyect,
+                ProyectName: req.params.proyectName
+              },
+              newTaskBoards,
+              (err, data) => {
+                if (err) throw err;
+                res.send(data);
+              }
+            );
+        });
+      });
+  });
+});
+
+/* PUT Modifica el proyecto Eliminando un nuevo Task dado el AdminProyect, el ProyectName, el indice del taskBoard y el indice del task */
+router.put("/:AdminProyect/:proyectName/deletetask/:TaskBoardIndex/:TaskIndex", function(
+  req,
+  res,
+  next
+) {
+  conn.then(client => {
+    client
+      .db(DB)
+      .collection(COLLECTION)
+      .find({
+        AdminProyect: req.params.AdminProyect,
+        ProyectName: req.params.proyectName
+      })
+      .toArray((error, data) => {
+        if (!data) res.send([]);
+        if (error) throw error;
+        let proyect = data[0];
+        let taskBoards = proyect.TaskBoards;
+        let tasks = taskBoards[req.params.TaskBoardIndex].Tasks;
+        tasks.splice(req.params.TaskIndex,1);
+        for (let i = 0; i < tasks.length; i++) {
+          let t = tasks[i];
+          t.index = i;
+        }
+
+        let newTaskBoards = {
+          $set: {
+            TaskBoards: taskBoards
+          }
+        };
+
+        conn.then(client => {
+          client
+            .db(DB)
+            .collection(COLLECTION)
+            .updateOne(
+              {
+                AdminProyect: req.params.AdminProyect,
+                ProyectName: req.params.proyectName
+              },
+              newTaskBoards,
+              (err, data) => {
+                if (err) throw err;
+                res.send(data);
+              }
+            );
+        });
+      });
+  });
+});
+
+/* PUT Modifica el proyecto Asignando a un usuario un Task dado el AdminProyect, el ProyectName, el indice del taskBoard, el indice del task y el nombre del asociado */
+router.put("/:AdminProyect/:proyectName/:TaskBoardIndex/:TaskIndex/assign/:name", function(
+  req,
+  res,
+  next
+) {
+  conn.then(client => {
+    client
+      .db(DB)
+      .collection(COLLECTION)
+      .find({
+        AdminProyect: req.params.AdminProyect,
+        ProyectName: req.params.proyectName
+      })
+      .toArray((error, data) => {
+        if (!data) res.send([]);
+        if (error) throw error;
+        let proyect = data[0];
+        let taskBoards = proyect.TaskBoards;
+        let tasks = taskBoards[req.params.TaskBoardIndex].Tasks;
+
+        let task = tasks[req.params.TaskIndex];
+
+        let newTaskBoards = {
+          $set: {
+            TaskBoards: taskBoards
+          }
+        };
+
+        conn.then(client => {
+          client
+            .db(DB)
+            .collection(COLLECTION)
+            .updateOne(
+              {
+                AdminProyect: req.params.AdminProyect,
+                ProyectName: req.params.proyectName
+              },
+              newTaskBoards,
+              (err, data) => {
+                if (err) throw err;
+                res.send(data);
+              }
+            );
+        });
+      });
+  });
+});
+
 
 
 
