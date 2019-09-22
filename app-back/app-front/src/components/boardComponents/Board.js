@@ -15,7 +15,6 @@ class Board extends Component {
             this.setState({
                 TaskBoards: t[0].TaskBoards
             });
-            console.log(this.props);
         })
     }
 
