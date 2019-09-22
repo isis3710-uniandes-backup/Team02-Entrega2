@@ -420,6 +420,8 @@ router.put("/:AdminProyect/:proyectName/:TaskBoardIndex/:TaskIndex/assign/:name"
 
         let task = tasks[req.params.TaskIndex];
 
+        task.onCharge.push(req.params.name);
+
         let newTaskBoards = {
           $set: {
             TaskBoards: taskBoards
@@ -445,6 +447,69 @@ router.put("/:AdminProyect/:proyectName/:TaskBoardIndex/:TaskIndex/assign/:name"
       });
   });
 });
+
+/* PUT Modifica el proyecto colocando un tiempo a un Task dado el AdminProyect, el ProyectName, el indice del taskBoard y el indice del task*/
+router.put("/:AdminProyect/:proyectName/:TaskBoardIndex/:TaskIndex/addTime", function(
+  req,
+  res,
+  next
+) {
+  conn.then(client => {
+    client
+      .db(DB)
+      .collection(COLLECTION)
+      .find({
+        AdminProyect: req.params.AdminProyect,
+        ProyectName: req.params.proyectName
+      })
+      .toArray((error, data) => {
+        if (!data) res.send([]);
+        if (error) throw error;
+        let body = req.body;
+        let proyect = data[0];
+        let taskBoards = proyect.TaskBoards;
+        let tasks = taskBoards[req.params.TaskBoardIndex].Tasks;
+
+        let task = tasks[req.params.TaskIndex];
+
+        let encontro = false;
+        for (let i = 0; i < task.timeSpent.length && !encontro ; i++) {
+          let e = task.timeSpent[i];
+          if (e.UserName === body.UserName){
+            e.timeSec += body.timeSec;
+            encontro = true;
+          }
+        }
+
+        if(!encontro) task.timeSpent.push(body);
+
+        let newTaskBoards = {
+          $set: {
+            TaskBoards: taskBoards
+          }
+        };
+
+        conn.then(client => {
+          client
+            .db(DB)
+            .collection(COLLECTION)
+            .updateOne(
+              {
+                AdminProyect: req.params.AdminProyect,
+                ProyectName: req.params.proyectName
+              },
+              newTaskBoards,
+              (err, data) => {
+                if (err) throw err;
+                res.send(data);
+              }
+            );
+        });
+      });
+  });
+});
+
+
 
 
 
