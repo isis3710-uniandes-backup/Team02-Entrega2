@@ -18,7 +18,7 @@ class signIn extends Component {
 
     registerUser = (data) => {
         console.log(`Register data ${data}`);
-        try { return axios.post("http://localhost:3001/users", data)}
+        try { return axios.post("/users", data)}
         catch (error) {console.error(`Error realizando el post de los datos: ${error}`)}
     };
 

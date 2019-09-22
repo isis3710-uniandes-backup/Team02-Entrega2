@@ -17,7 +17,7 @@ class Login extends Component {
 	}	
 	
 	getLogData = (user, pass) => {
-		try { return axios.get(`http://localhost:3001/users/${user}/${pass}`); }
+		try { return axios.get(`/users/${user}/${pass}`); }
 		catch (error) {console.error(`Error fatal trayendo los datos del login: ${error}`)}
 	};
 
