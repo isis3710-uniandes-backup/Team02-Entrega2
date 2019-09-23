@@ -120,7 +120,7 @@ class MyProyects extends Component {
 
         return (
             <div className="container-fluid">
-                <div className="text-center shadow-sm p-3 mb-5 bg-white rounded ">
+                <div className="text-center shadow p-3 mb-5 rounded bg-primary text-white">
                     <h1> {this.state.user}'s Projects </h1>
                 </div>
                 {this.checkProjects()}
@@ -167,7 +167,7 @@ class MyProyects extends Component {
 
 
                 <div id="addProject" className="">
-                    <button className="btn bg-primary btn-circle btn-xl" data-toggle="modal" data-target="#modalLoginForm"><h1 className="text-white"><i className="fas fa-plus prefix grey-text"></i></h1></button>
+                    <button className="btn bg-success btn-circle btn-xl" data-toggle="modal" data-target="#modalLoginForm"><h1 className="text-white"><i className="fas fa-plus prefix grey-text"></i></h1></button>
                 </div>
             </div>
         )

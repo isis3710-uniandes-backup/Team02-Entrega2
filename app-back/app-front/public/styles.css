@@ -42,3 +42,12 @@
     bottom: 10px;
     right: 10px;
 }
+
+#addTaskBoard {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+#card-login{
+}

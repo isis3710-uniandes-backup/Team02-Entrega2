@@ -165,7 +165,7 @@ class Board extends Component {
   render() {
     return (
       <div>
-        <div className="text-center shadow-sm p-3 mb-5 bg-white rounded ">
+        <div className="text-center shadow p-3 mb-5 rounded bg-primary text-white">
           <h1>Project: {this.state.name}</h1>
         </div>
         <div className="container-fluid">
@@ -185,6 +185,7 @@ class Board extends Component {
         </div>
         <div className="text-right">
         <button
+          id="addTaskBoard"
           type="button"
           className="btn bg-success btn-circle btn-xl"
           data-toggle="modal"
