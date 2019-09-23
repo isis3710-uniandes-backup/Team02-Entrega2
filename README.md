@@ -8,6 +8,15 @@
 
 ## ⏰⏰⏰⏰⏱⏱⏱
 ------
+
+## Description
+
+We are here to manage your tasks for all the proyects you have. Manage every single task stage and assign them to your colleagues. Most importantly: record How much time takes you to do each task.
+
+we have a login so you can register and share your proyect with your friends.
+
+
+------
 ## How To run
 
 **What you should have installedon your pc before:**
