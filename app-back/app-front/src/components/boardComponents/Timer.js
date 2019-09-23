@@ -10,6 +10,7 @@ class Timer extends React.Component {
       index:this.props.index,
       indexP: this.props.indexP
     }
+    //console.log(props);
     this.startTimer = this.startTimer.bind(this)
     this.stopTimer = this.stopTimer.bind(this)
     this.resetTimer = this.resetTimer.bind(this)
@@ -33,26 +34,38 @@ class Timer extends React.Component {
   }
   render() {
 
+    // start Button
     let start = (this.state.time === 0) ?
-      <button onClick={this.startTimer}>start</button> :
-      null
+      <button className = 'btn btn-primary btn-sm m-1'onClick={this.startTimer}>start</button> :
+      null;
 
+    //stop button
     let stop = (this.state.time === 0 || !this.state.isOn) ?
       null :
-      <button onClick={this.stopTimer}>stop</button>
+      <button className = 'btn btn-danger btn-sm m-1' onClick={this.stopTimer}>stop</button>;
 
+    //resume button
     let resume = (this.state.time === 0 || this.state.isOn) ?
       null :
-      <button onClick={this.startTimer}>resume</button>
+      <button className = 'btn btn-primary btn-sm m-1' onClick={this.startTimer}>resume</button>;
+
+    //restart button
     let reset = (this.state.time === 0 || this.state.isOn) ?
       null :
-      <button onClick={this.resetTimer}>reset</button>
-      let submit = (this.state.time === 0 || this.state.isOn) ?
+      <button className = 'btn btn-danger btn-sm m-1' onClick={this.resetTimer}>reset</button>;
+
+    //submit button  
+    let submit = (this.state.time === 0 || this.state.isOn) ?
       null :
-      <button onClick={this.state.functions[2](this.state.indexP,this.state.index,this.state.time/1000)}>submit</button>
+      <button className = 'btn btn-info btn-sm m-1' onClick={this.state.functions[2](this.state.indexP,this.state.index,this.state.time/1000)}>submit</button>
+
+      let sec = Math.floor((this.state.time/1000)%60);
+      let min = Math.floor((this.state.time/1000)/60);
+      let hour = Math.floor(((this.state.time/1000)/60)/60);
+
     return(
       <div>
-        <h3>timer: {this.state.time/1000}s</h3>
+        <h3>Timer: {hour}:{min}:{sec}</h3>
         {start}
         {resume}
         {stop}
