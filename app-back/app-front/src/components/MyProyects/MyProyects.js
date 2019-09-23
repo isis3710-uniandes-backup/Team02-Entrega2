@@ -102,7 +102,7 @@ class MyProyects extends Component {
                 </div>
                 <div className="row justify-content-center">
                     <div className="col-4 text-center m-5">
-                        <button className="btn bg-success" data-toggle="modal" data-target="#modalLoginForm"><h4 className="text-white">Create first task</h4></button>
+                        <button className="btn bg-success" data-toggle="modal" data-target="#modalLoginForm"><h4 className="text-white">Create first project</h4></button>
                     </div>
                 </div>
             </div> : <div className="card-columns">
