@@ -13,13 +13,26 @@ class Task extends Component {
     user:this.props.user
   };
 
+  changeTimeSpent = (time) =>{
+    let x = this.state.timeSpent;
+    x.forEach(e => {
+      if(e.UserName === this.state.user){
+        e.timeSec += time;
+        this.setState({
+          timeSpent: x
+        });
+      }
+    });
+    alert("your time has been submitted!");
+  };
+
   render() {
       let t = "#moreInfo" + this.state.indexP + "-" + this.state.index;
       let v = "moreInfo" + this.state.indexP + "-" + this.state.index;
     return (
       <div className="card bg-light task shadow-sm">
         <div className="card-body">
-          <div className="card-title border-bottom">{this.state.name}</div>
+          <h4 className="card-title border-bottom">{this.state.name}</h4>
           <div className="card-body">{this.state.des}</div>
           <a href={t} data-toggle="collapse" className="btn-lg btn-block btn-secondary mb-2 dropdown-toggle">
             More
@@ -35,9 +48,9 @@ class Task extends Component {
               <ul className = 'list-group m-1'>
               <li className="list-group-item list-group-item-info" >Time spent:</li>
               {this.state.timeSpent.map((e,i)=>(
-                  <li className="list-group-item" key = {e.UserName}>{e.UserName} :  {Math.floor(((e.timeSec/1000)/60)/60)}:{Math.floor((e.timeSec/1000)/60)}:{Math.floor((e.timeSec/1000)%60)}</li> 
+                  <li className="list-group-item" key = {e.UserName}>{e.UserName} :   {Math.floor(((e.timeSec)/60)/60)}:{Math.floor((e.timeSec)/60)}:{Math.floor((e.timeSec)%60)}</li> 
               ))}
-              <h4 className ='mt-2'>Start your task time, {this.state.user}!</h4> < Timer index = {this.state.index} indexP = {this.state.indexP} functions={this.state.functions} />
+              <h4 className ='mt-2'>Start your task time, {this.state.user}!</h4> < Timer index = {this.state.index} indexP = {this.state.indexP} functions={this.state.functions} timerState = {this.changeTimeSpent} />
               </ul>
             </div>
           </div>
@@ -49,9 +62,9 @@ class Task extends Component {
               );
             }}
             type="button"
-            className="btn btn-outline-primary float-right mt-2"
+            className="btn btn-outline-danger float-right mt-2"
           >
-            Remove
+            <i className="fas fa-trash prefix grey-text"></i>
           </button>
         </div>
       </div>

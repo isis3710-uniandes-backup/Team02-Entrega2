@@ -100,6 +100,7 @@ class TaskBoard extends Component {
       arr.push(i.toString());
     }
     return (
+      
       <div className="col-4">
         <div className="card shadow-sm p-3 mb-5 bg-white rounded taskBoard">
           <div className="card-body">
@@ -108,22 +109,24 @@ class TaskBoard extends Component {
             </div>
             <div>
               {this.state.tasks.map((e, i) => (
+                <div data-aos="zoom-in">
                 <Task
                   user={this.props.user}
                   value={e}
                   key={e.name}
                   functions={this.state.functions}
                 />
+                </div>
+                
               ))}
             </div>
             <button
               data-toggle="modal"
               data-target={t}
               type="button"
-              className="btn btn-primary float-right m-1"
+              className="btn btn-success float-right m-1"
             >
-              {" "}
-              Add
+              <i className="fas fa-plus prefix grey-text"></i>
             </button>
 
             <button
@@ -133,7 +136,7 @@ class TaskBoard extends Component {
               type="button"
               className="btn btn-danger float-right m-1"
             >
-              Remove
+              <i className="fas fa-trash prefix grey-text"></i>
             </button>
             <div
               className="modal fade"

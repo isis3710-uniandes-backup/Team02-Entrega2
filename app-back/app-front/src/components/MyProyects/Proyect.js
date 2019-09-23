@@ -55,7 +55,7 @@ class Proyect extends Component {
                         <div className="card-body">
                             <p> Project Administrator: {this.state.adminProyect} </p>
                         </div>
-                        <button type="button" className="btn btn-outline-primary float-right" onClick={this.clickBoard}>Board <i class="far fa-clipboard"></i></button>
+                        <button type="button" className="btn btn-outline-primary float-right" onClick={this.clickBoard}>Board <i className="far fa-clipboard"></i></button>
 
                     </div>
                 </div>

@@ -57,7 +57,10 @@ class Timer extends React.Component {
     //submit button  
     let submit = (this.state.time === 0 || this.state.isOn) ?
       null :
-      <button className = 'btn btn-info btn-sm m-1' onClick={this.state.functions[2](this.state.indexP,this.state.index,this.state.time/1000)}>submit</button>
+      <button className = 'btn btn-info btn-sm m-1' onClick={()=>{
+        this.state.functions[2](this.state.indexP,this.state.index,this.state.time/1000);
+        this.props.timerState(this.state.time/1000);
+      }}>submit</button>
 
       let sec = Math.floor((this.state.time/1000)%60);
       let min = Math.floor((this.state.time/1000)/60);
