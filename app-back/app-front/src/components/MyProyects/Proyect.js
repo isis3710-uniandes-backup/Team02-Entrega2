@@ -28,8 +28,8 @@ class Proyect extends Component {
     }
 
     checkDelete = () => {
-        if(this.state.adminProyect === this.props.user){
-            return <button className="btn-sm btn-danger" onClick={this.handleClick}>Delete</button>
+        if (this.state.adminProyect === this.props.user) {
+            return <button className="btn-sm mb-3 btn-danger" onClick={this.handleClick}><i className="fas fa-trash prefix grey-text"></i></button>
         }
     }
 
@@ -41,22 +41,22 @@ class Proyect extends Component {
         }
         else {
             return (
-                <div className="card bg-light task shadow-sm">
-                    <div className="card-body">
+                <div className="card bg-light task shadow-sm p-3 mb-5">
 
-                        <div className="card-title border-bottom text-primary row">
-                            <div className="col-6">
-                                <h4>{this.state.name}</h4>
-                            </div>
-                            <div className="col-6" align="right">
-                                {this.checkDelete()}
-                            </div>
+
+                    <div className="card-title border-bottom text-primary row">
+                        <div className="col-6">
+                            <h4>{this.state.name}</h4>
                         </div>
-                        <div className="card-body">
-                            <p> Project Administrator: {this.state.adminProyect} </p>
+                        <div className="col-6" align="right">
+                            {this.checkDelete()}
                         </div>
-                        <button type="button" className="btn btn-outline-primary float-right" onClick={this.clickBoard}>Board</button>
                     </div>
+                    <div className="card-body">
+                        <p> Project Administrator: {this.state.adminProyect} </p>
+                    </div>
+                    <button type="button" className="btn btn-outline-primary float-right" onClick={this.clickBoard}>Board <i class="far fa-clipboard"></i></button>
+
                 </div>
             );
         }

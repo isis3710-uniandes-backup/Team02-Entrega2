@@ -122,20 +122,18 @@ class MyProyects extends Component {
                             </div>
                             <div className="modal-body mx-3">
                                 <div className="md-form mb-5">
-                                    <i className="fas fa-envelope prefix grey-text"></i>
-                                    <label data-error="wrong" data-success="right" htmlFor="defaultForm-email">Name</label>
+                                    <label data-error="wrong" data-success="right" htmlFor="defaultForm-email"><i className="fas fa-file-signature prefix grey-text"></i> Name</label>
                                     <input type="text" id="defaultForm-name" className="form-control validate"></input>
 
                                 </div>
                                 <div className="md-form mb-4">
                                     <div className="row">
                                         <div className="col-10">
-                                            <i className="fas fa-lock prefix grey-text"></i>
-                                            <label data-error="wrong" data-success="right" htmlFor="defaultForm-pass">Associates</label>
+                                            <label data-error="wrong" data-success="right" htmlFor="defaultForm-pass"><i className="fas fa-user-friends prefix grey-text"></i> Associates</label>
                                         </div>
                                         <div className="col-2">
                                             <div className="text-right">
-                                                <button className="btn-sm btn-warning" id="btn-add" onClick={this.addAsociate}>Add</button>
+                                                <button className="btn-sm btn-info" id="btn-add" onClick={this.addAsociate}>Add</button>
                                             </div>
                                         </div>
                                     </div>
