@@ -18,6 +18,7 @@ class TaskBoard extends Component {
   };
 
   add = () => {
+
     let url =
       "/proyects/" +
       this.state.admin +
@@ -29,6 +30,7 @@ class TaskBoard extends Component {
         for (let i = 0; i < this.state.numOncharge; i++) {
             onCharge.push(document.getElementById(i).value)
         }
+
     let data = {
       index: this.state.tasks.length,
       indexP: this.state.index,
@@ -37,6 +39,7 @@ class TaskBoard extends Component {
       onCharge: onCharge,
       timeSpent: []
     };
+
     fetch(url, {
       method: "PUT",
       body: JSON.stringify(data),
@@ -55,7 +58,9 @@ class TaskBoard extends Component {
       onCharge: onCharge,
       timeSpent: []
     };
+
     let newtasks = this.state.tasks;
+
     newtasks.push(t);
     this.setState({
       tasks: newtasks
@@ -79,6 +84,12 @@ class TaskBoard extends Component {
     this.setState({ numOncharge: this.state.numOncharge + 1 });
     this.setState({ state: this.state });
   };
+
+  deleteOnCharge = (e) =>{
+    e.preventDefault();
+    this.setState({ numOncharge: this.state.numOncharge - 1 });
+    this.setState({ state: this.state });
+  }
   
 
   render() {
@@ -109,7 +120,7 @@ class TaskBoard extends Component {
               data-toggle="modal"
               data-target={t}
               type="button"
-              className="btn btn-primary float-right"
+              className="btn btn-primary float-right m-1"
             >
               {" "}
               Add
@@ -120,7 +131,7 @@ class TaskBoard extends Component {
                 this.state.functions[1](this.state.index, this.state.name);
               }}
               type="button"
-              className="btn btn-danger float-right"
+              className="btn btn-danger float-right m-1"
             >
               Remove
             </button>
@@ -187,7 +198,7 @@ class TaskBoard extends Component {
                         </label>
                         <div className="md-form mb-4">
                           <div className="row">
-                            <div className="col-10">
+                            <div className="col-9">
                               <i className="fas fa-lock prefix grey-text"></i>
                               <label
                                 data-error="wrong"
@@ -196,14 +207,21 @@ class TaskBoard extends Component {
                               >
                               </label>
                             </div>
-                            <div className="col-2">
+                            <div className="col-3">
                               <div className="text-right">
                                 <button
-                                  className="btn btn-primary"
+                                  className="btn btn-primary m-1"
                                   id="add"
                                   onClick={this.addOnCharge}
                                   >
                                   Add
+                                </button>
+                                <button
+                                  className="btn btn-outline-danger m-1"
+                                  id="deleteOnCharge"
+                                  onClick={this.deleteOnCharge}
+                                  >
+                                  remove
                                 </button>
                               </div>
                             </div>
