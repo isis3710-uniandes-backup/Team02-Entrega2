@@ -29,7 +29,7 @@ class Proyect extends Component {
 
     checkDelete = () => {
         if (this.state.adminProyect === this.props.user) {
-            return <button className="btn-sm mb-3 btn-danger" onClick={this.handleClick}><i className="fas fa-trash prefix grey-text"></i></button>
+            return <button className="btn-sm mb-3 btn-outline-danger" onClick={this.handleClick}><i className="fas fa-trash prefix grey-text"></i></button>
         }
     }
 
@@ -44,8 +44,6 @@ class Proyect extends Component {
                 <div data-aos="flip-up" data-aos-duration="2000">
 
                     <div className="card bg-light task shadow-sm p-3 mb-5">
-
-
                         <div className="card-title border-bottom text-primary row">
                             <div className="col-6">
                                 <h4>{this.state.name}</h4>

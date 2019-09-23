@@ -49,7 +49,7 @@ class signIn extends Component {
     render() {
         return (
             <div data-aos="fade-up" data-aos-duration="1000">
-            <div className="col-4 justify-content-center centrar card p-3 mb-5">
+            <div className="col-4 justify-content-center centrar card p-3 mb-5 shadow">
             	<h1 className="text-center mb4">Time Tasks</h1>
 				<img src={image} alt = 'logo' className="rounded mx-auto d-block " height = '60%' width = '60%'></img>
                 <h5 className="align-content-center mt-3"> Sign In </h5>
