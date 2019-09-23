@@ -41,23 +41,27 @@ class Proyect extends Component {
         }
         else {
             return (
-                <div className="card bg-light task shadow-sm p-3 mb-5">
+                <div data-aos="flip-up" data-aos-duration="2000">
+
+                    <div className="card bg-light task shadow-sm p-3 mb-5">
 
 
-                    <div className="card-title border-bottom text-primary row">
-                        <div className="col-6">
-                            <h4>{this.state.name}</h4>
+                        <div className="card-title border-bottom text-primary row">
+                            <div className="col-6">
+                                <h4>{this.state.name}</h4>
+                            </div>
+                            <div className="col-6" align="right">
+                                {this.checkDelete()}
+                            </div>
                         </div>
-                        <div className="col-6" align="right">
-                            {this.checkDelete()}
+                        <div className="card-body">
+                            <p> Project Administrator: {this.state.adminProyect} </p>
                         </div>
-                    </div>
-                    <div className="card-body">
-                        <p> Project Administrator: {this.state.adminProyect} </p>
-                    </div>
-                    <button type="button" className="btn btn-outline-primary float-right" onClick={this.clickBoard}>Board <i class="far fa-clipboard"></i></button>
+                        <button type="button" className="btn btn-outline-primary float-right" onClick={this.clickBoard}>Board <i class="far fa-clipboard"></i></button>
 
+                    </div>
                 </div>
+
             );
         }
     }

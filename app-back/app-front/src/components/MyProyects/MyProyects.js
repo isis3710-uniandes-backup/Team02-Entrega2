@@ -14,7 +14,7 @@ class MyProyects extends Component {
     }
 
     componentDidMount() {
-        let url = "/proyects/" + this.state.user ;
+        let url = "/proyects/" + this.state.user;
         // Cuando ya sirva bien el login, se utilizará la variable URL para que encuentre los proyectos del usuario que se loggeo
         //console.log("url: " + url);
         fetch(url)
@@ -32,7 +32,7 @@ class MyProyects extends Component {
             pathname: '/board'
         });
     };
-    
+
     addAsociate = () => {
         this.setState({ numAsociados: this.state.numAsociados + 1 });
         this.setState({ state: this.state });
@@ -92,6 +92,24 @@ class MyProyects extends Component {
 
     }
 
+    checkProjects = () => {
+        return this.state.projects.length === 0 ?
+            <div>
+                <div className="row justify-content-center">
+                    <div className="col-4 text-center m-5">
+                        <h3>You haven't created any projects yet.</h3>
+                    </div>
+                </div>
+                <div className="row justify-content-center">
+                    <div className="col-4 text-center m-5">
+                        <button className="btn bg-primary" data-toggle="modal" data-target="#modalLoginForm"><h4 className="text-white">Create first task</h4></button>
+                    </div>
+                </div>
+            </div> : <div className="card-columns">
+                {this.state.projects.map((e, index) => <Proyect key={index} user={this.state.user} value={e} action={this.refreshProjects} proyect={this.props.proyectName} />)}
+            </div>
+    }
+
     render() {
         //console.log(this.props)
 
@@ -101,15 +119,11 @@ class MyProyects extends Component {
         }
 
         return (
-            <div className="container">
-                <div className="row justify-content-center">
+            <div className="container-fluid">
+                <div className="text-center shadow-sm p-3 mb-5 bg-white rounded ">
                     <h1> {this.state.user}'s Projects </h1>
                 </div>
-                <div className="card-columns">
-                    {this.state.projects.map((e, index) => <Proyect key={index} user={this.state.user} value={e} action={this.refreshProjects} proyect={this.props.proyectName} />)}
-                </div>
-
-
+                {this.checkProjects()}
                 <div className="modal fade" id="modalLoginForm" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel"
                     aria-hidden="true">
                     <div className="modal-dialog" role="document">
@@ -153,7 +167,7 @@ class MyProyects extends Component {
 
 
                 <div id="addProject" className="">
-                    <button className="btn bg-primary btn-circle btn-xl" data-toggle="modal" data-target="#modalLoginForm"><h1 className="text-white">+</h1></button>
+                    <button className="btn bg-primary btn-circle btn-xl" data-toggle="modal" data-target="#modalLoginForm"><h1 className="text-white"><i className="fas fa-plus prefix grey-text"></i></h1></button>
                 </div>
             </div>
         )
