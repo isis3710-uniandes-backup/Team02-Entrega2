@@ -166,7 +166,7 @@ class Board extends Component {
     return (
       <div>
         <div className="text-center shadow-sm p-3 mb-5 bg-white rounded ">
-          HELLO: {this.props.user}
+          <h1>Project: {this.state.name}</h1>
         </div>
         <div className="container-fluid">
           <div className="row">
@@ -190,7 +190,7 @@ class Board extends Component {
           data-toggle="modal"
           data-target="#modalTaskBoard"
         >
-          <h1 className="text-white">+</h1>
+          <h1 className="text-white"><i className="fas fa-plus prefix grey-text"></i></h1>
         </button>
         </div>
         <div
