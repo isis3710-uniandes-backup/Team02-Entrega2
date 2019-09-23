@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import image from '../../data/clock.png';
+
 const axios = require('axios'); //Libreria axios
 
 class signIn extends Component {
@@ -46,8 +48,11 @@ class signIn extends Component {
 
     render() {
         return (
-            <div className="col-4 centrar">
-                <h5 className="align-content-center"> Sign In </h5>
+            <div data-aos="fade-up" data-aos-duration="1000">
+            <div className="col-4 justify-content-center centrar card p-3 mb-5">
+            	<h1 className="text-center mb4">Time Tasks</h1>
+				<img src={image} alt = 'logo' className="rounded mx-auto d-block " height = '60%' width = '60%'></img>
+                <h5 className="align-content-center mt-3"> Sign In </h5>
                 <form>
 					<div className="form-group">
 						<label>User name</label>
@@ -65,6 +70,7 @@ class signIn extends Component {
 						<button type="button" onClick={this.clickRegister} className="btn btn-success logButtonSpace"> Register </button>					
 					</div>
 				</form>
+            </div>
             </div>
         )
     }
