@@ -26,15 +26,17 @@ class Board extends Component {
     // });
         fetch(`/proyects/${this.props.adminProyect}/${this.props.proyectName}`).then(async (resp) => {
             let t = await resp.json();
-            this.setState({
-                TaskBoards: t[0].TaskBoards,
-                admin: t[0].AdminProyect,
-                associates: t[0].Associates,
-                name: t[0].ProyectName
-            });
-        })
+            if(!(t===undefined)){
+                this.setState({
+                    TaskBoards: t[0].TaskBoards,
+                    admin: t[0].AdminProyect,
+                    associates: t[0].Associates,
+                    name: t[0].ProyectName
+                });
+            }
+            }
+        )
   }
-
   add = () => {
     let url =
       "/proyects/" + this.state.admin + "/" + this.state.name + "/addTaskBoard";
@@ -181,14 +183,16 @@ class Board extends Component {
             ))}
           </div>
         </div>
+        <div className="text-right">
         <button
           type="button"
-          className="btn btn-success"
+          className="btn bg-success btn-circle btn-xl"
           data-toggle="modal"
           data-target="#modalTaskBoard"
         >
-          New board
+          <h1 className="text-white">+</h1>
         </button>
+        </div>
         <div
           className="modal fade"
           id="modalTaskBoard"

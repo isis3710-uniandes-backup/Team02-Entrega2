@@ -32,7 +32,7 @@ class MyProyects extends Component {
             pathname: '/board'
         });
     };
-
+    
     addAsociate = () => {
         this.setState({ numAsociados: this.state.numAsociados + 1 });
         this.setState({ state: this.state });

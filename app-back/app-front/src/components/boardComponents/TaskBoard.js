@@ -13,17 +13,28 @@ class TaskBoard extends Component {
     functions: this.props.functions,
     admin: this.props.admin,
     associates: this.props.associates,
-    proyectName: this.props.name
+    proyectName: this.props.name,
+    numOncharge: 0
   };
 
   add = () => {
-    let url = "/proyects/"+this.state.admin + "/" + this.state.proyectName + "/addTask/" + this.state.index;
+    let url =
+      "/proyects/" +
+      this.state.admin +
+      "/" +
+      this.state.proyectName +
+      "/addTask/" +
+      this.state.index;
+      let onCharge = [];
+        for (let i = 0; i < this.state.numOncharge; i++) {
+            onCharge.push(document.getElementById(i).value)
+        }
     let data = {
-      index: this.state.tasks.length+1,
+      index: this.state.tasks.length,
       indexP: this.state.index,
       name: this.state.value1,
       description: this.state.value2,
-      onCharge: [this.state.value3],
+      onCharge: onCharge,
       timeSpent: []
     };
     fetch(url, {
@@ -36,25 +47,24 @@ class TaskBoard extends Component {
       .then(res => res.json())
       .catch(error => console.error("Error:", error));
 
-      let t = {
-        index: this.state.tasks.length,
-        indexP: this.state.index,
-        name: this.state.value1,
-        description: this.state.value2,
-        onCharge:[this.state.value3],
-        timeSpent:[]
-      };
-      let newtasks = this.state.tasks;
-      newtasks.push(t);
-      this.setState({
-        tasks: newtasks
-      });
+    let t = {
+      index: this.state.tasks.length,
+      indexP: this.state.index,
+      name: this.state.value1,
+      description: this.state.value2,
+      onCharge: onCharge,
+      timeSpent: []
+    };
+    let newtasks = this.state.tasks;
+    newtasks.push(t);
+    this.setState({
+      tasks: newtasks
+    });
   };
 
   onChangeValue = event => {
     this.setState({ value1: event.target.value });
   };
-
 
   onChangeValue2 = event => {
     this.setState({ value2: event.target.value });
@@ -64,9 +74,20 @@ class TaskBoard extends Component {
     this.setState({ value3: event.target.value });
   };
 
+  addOnCharge = (e) => {
+    e.preventDefault();
+    this.setState({ numOncharge: this.state.numOncharge + 1 });
+    this.setState({ state: this.state });
+  };
+  
+
   render() {
     let t = "#mod" + this.state.index;
     let v = "mod" + this.state.index;
+    let arr = [];
+    for (let i = 0; i < this.state.numOncharge; i++) {
+      arr.push(i.toString());
+    }
     return (
       <div className="col-4">
         <div className="card shadow-sm p-3 mb-5 bg-white rounded taskBoard">
@@ -95,17 +116,14 @@ class TaskBoard extends Component {
             </button>
 
             <button
-            onClick={() => {
-              this.state.functions[1](
-                this.state.index,
-                this.state.name
-              );
-            }}
-            type="button"
-            className="btn btn-danger float-right"
-          >
-            Remove
-          </button>
+              onClick={() => {
+                this.state.functions[1](this.state.index, this.state.name);
+              }}
+              type="button"
+              className="btn btn-danger float-right"
+            >
+              Remove
+            </button>
             <div
               className="modal fade"
               id={v}
@@ -167,14 +185,46 @@ class TaskBoard extends Component {
                         >
                           On charge:
                         </label>
-                        <select id="empid" 
-                          onChange={this.onChangeValue3}>
-                            <option value = " ">---</option>
-                          <option value = {this.state.admin}>{this.state.admin}</option>
-                          {this.state.associates.map((e,i)=>(
-                            <option value={e} key={e}>{e}</option>
+                        <div className="md-form mb-4">
+                          <div className="row">
+                            <div className="col-10">
+                              <i className="fas fa-lock prefix grey-text"></i>
+                              <label
+                                data-error="wrong"
+                                data-success="right"
+                                htmlFor="defaultForm-pass"
+                              >
+                              </label>
+                            </div>
+                            <div className="col-2">
+                              <div className="text-right">
+                                <button
+                                  className="btn btn-primary"
+                                  id="add"
+                                  onClick={this.addOnCharge}
+                                  >
+                                  Add
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <br></br>
+                          {arr.map((value, index) => {
+                            return (
+                              <select key={value} id={index} onChange={this.onChangeValue3}>
+                          <option value=" ">---</option>
+                          <option value={this.state.admin}>
+                            {this.state.admin}
+                          </option>
+                          {this.state.associates.map((e, i) => (
+                            <option value={e} key={i}>
+                              {e}
+                            </option>
                           ))}
                         </select>
+                            );
+                          })}
+                        </div>
                       </div>
                     </form>
                   </div>
@@ -187,7 +237,13 @@ class TaskBoard extends Component {
                       Close
                     </button>
                     <button
-                      disabled={!(this.state.value2 && this.state.value1 && this.state.value3)}
+                      disabled={
+                        !(
+                          this.state.value2 &&
+                          this.state.value1 &&
+                          this.state.value3
+                        )
+                      }
                       type="button"
                       onClick={this.add}
                       className="btn btn-primary"
