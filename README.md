@@ -13,8 +13,27 @@
 
 We are here to manage your tasks for all the proyects you have. Manage every single task stage and assign them to your colleagues. Most importantly: record How much time takes you to do each task.
 
-we have a login so you can register and share your proyect with your friends.
+* we have a login so you can register and share your proyect with your friends.
 
+![](app-back/imagesReadMe/login.png)
+
+* also you can create and manage all your proyects!!
+
+![](app-back/imagesReadMe/myProyects.png)
+
+* in aproyect you can create a new taskboard an new tasks!!!
+
+![](app-back/imagesReadMe/createBoard.png)
+
+![](app-back/imagesReadMe/createTask.png)
+
+* You can manage your tasks!!!
+
+![](app-back/imagesReadMe/tasks.png)
+
+* view the details of every task. You can record the time you spend on  a given task!!! 👌👌👌
+
+![](app-back/imagesReadMe/recordtime.png)
 
 ------
 ## How To run
