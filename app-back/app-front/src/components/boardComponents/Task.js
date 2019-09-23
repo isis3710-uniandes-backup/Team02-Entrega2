@@ -26,15 +26,21 @@ class Task extends Component {
           </a>
           <div className="collapse" id={v}>
             <div className="card card-body">
-            On charge:
+              <ul>
+            <li>On charge:</li>
+            <ol>
               {this.state.onCharge.map((e,i)=>(
-                  <div key = {e}>{e}</div> 
+                  <li key = {e}>{e}</li> 
               ))}
-              Time spent:
+              </ol>
+              <li>Time spent:</li>
+              <ol>
               {this.state.timeSpent.map((e,i)=>(
-                  <div key = {e.UserName}>{e.UserName} = {e.timeSec}</div> 
+                  <li key = {e.UserName}>{e.UserName} = {e.timeSec}</li> 
               ))}
-              <h3>Llevar tiempo:</h3>{this.state.user} => < Timer index = {this.state.index} indexP = {this.state.indexP} functions={this.state.functions} />
+              </ol>
+              <h4>Cronometra tu tiempo {this.state.user}!</h4> < Timer index = {this.state.index} indexP = {this.state.indexP} functions={this.state.functions} />
+              </ul>
             </div>
           </div>
           <button
