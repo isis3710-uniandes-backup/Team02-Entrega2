@@ -24,18 +24,18 @@ class Board extends Component {
     //     name: t[0].ProyectName
     //   });
     // });
-        fetch(`/proyects/${this.props.adminProyect}/${this.props.proyectName}`).then(async (resp) => {
-            let t = await resp.json();
-            if(!(t===undefined)){
-                this.setState({
-                    TaskBoards: t[0].TaskBoards,
-                    admin: t[0].AdminProyect,
-                    associates: t[0].Associates,
-                    name: t[0].ProyectName
-                });
-            }
-            }
-        )
+    fetch(`/proyects/${this.props.adminProyect}/${this.props.proyectName}`).then(async (resp) => {
+      let t = await resp.json();
+      if (!(t === undefined)) {
+        this.setState({
+          TaskBoards: t[0].TaskBoards,
+          admin: t[0].AdminProyect,
+          associates: t[0].Associates,
+          name: t[0].ProyectName
+        });
+      }
+    }
+    )
   }
   add = () => {
     let url =
@@ -162,37 +162,54 @@ class Board extends Component {
     });
   };
 
+  checkTaskBoards = () => {
+    return this.state.TaskBoards.length === 0 ?
+      <div>
+        <div className="row justify-content-center">
+          <div className="col-4 text-center m-5">
+            <h3>You haven't created any taskboards yet.</h3>
+          </div>
+        </div>
+        <div className="row justify-content-center">
+          <div className="col-4 text-center m-5">
+            <button className="btn bg-success" data-toggle="modal" data-target="#modalTaskBoard"><h4 className="text-white">Create first taskboard</h4></button>
+          </div>
+        </div>
+      </div> :
+      <div className="container-fluid">
+        <div className="row">
+          {this.state.TaskBoards.map((e, i) => (
+            <TaskBoard
+              name={this.state.name}
+              admin={this.state.admin}
+              associates={this.state.associates}
+              user={this.props.user}
+              value={e}
+              functions={[this.remove, this.remove2, this.submitTime]}
+              key={e.name}
+            />
+          ))}
+        </div>
+      </div>
+  }
+
   render() {
     return (
       <div>
         <div className="text-center shadow p-3 mb-5 rounded bg-primary text-white">
           <h1>Project: {this.state.name}</h1>
         </div>
-        <div className="container-fluid">
-          <div className="row">
-            {this.state.TaskBoards.map((e, i) => (
-              <TaskBoard
-                name={this.state.name}
-                admin={this.state.admin}
-                associates={this.state.associates}
-                user={this.props.user}
-                value={e}
-                functions={[this.remove, this.remove2, this.submitTime]}
-                key={e.name}
-              />
-            ))}
-          </div>
-        </div>
+        {this.checkTaskBoards()}
         <div className="text-right">
-        <button
-          id="addTaskBoard"
-          type="button"
-          className="btn bg-success btn-circle btn-xl"
-          data-toggle="modal"
-          data-target="#modalTaskBoard"
-        >
-          <h1 className="text-white"><i className="fas fa-plus prefix grey-text"></i></h1>
-        </button>
+          <button
+            id="addTaskBoard"
+            type="button"
+            className="btn bg-success btn-circle btn-xl"
+            data-toggle="modal"
+            data-target="#modalTaskBoard"
+          >
+            <h1 className="text-white"><i className="fas fa-plus prefix grey-text"></i></h1>
+          </button>
         </div>
         <div
           className="modal fade"
